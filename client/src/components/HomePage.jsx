@@ -1,14 +1,14 @@
 import { Accordion, AccordionTab } from 'primereact/accordion';
 import { InputText } from 'primereact/inputtext';
 
-// const HomePage = () => {
-//     return (
-//         <>
-//             <h1>HomePage:)</h1>
+const HomePage = () => {
+    return (
+        <>
+            <h1>Hacker!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</h1>
         
-//         </>
-//     )
-// }
+        </>
+    )
+}
 
 
 
@@ -134,36 +134,36 @@ import { InputText } from 'primereact/inputtext';
 // export default HomePage;
 
 
-import React, { useState, useEffect } from 'react';
+// import React, { useState, useEffect } from 'react';
 
-const HomePage = () => {
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const images = [
-    "http://localhost:7777/uploads/a.jpg",
-    "http://localhost:7777/uploads/c.jpg",
-    "http://localhost:7777/uploads/b.jpg",
-  ];
+// const HomePage = () => {
+//   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+//   const images = [
+//     "http://localhost:7777/uploads/a.jpg",
+//     "http://localhost:7777/uploads/c.jpg",
+//     "http://localhost:7777/uploads/b.jpg",
+//   ];
 
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      setCurrentImageIndex((currentImageIndex) => (currentImageIndex + 1) % images.length);
-    }, 3000); // Change images every 3 seconds
+//   useEffect(() => {
+//     const intervalId = setInterval(() => {
+//       setCurrentImageIndex((currentImageIndex) => (currentImageIndex + 1) % images.length);
+//     }, 3000); // Change images every 3 seconds
 
-    // Clean up the interval on component unmount
-    return () => clearInterval(intervalId);
-  }, [images.length]);
+//     // Clean up the interval on component unmount
+//     return () => clearInterval(intervalId);
+//   }, [images.length]);
 
-  return (
-    <div className="homepage">
-      <div className="image-slideshow">
-        <img src={images[currentImageIndex]} alt="Delicious Cake" style={{ width: '100%', display: 'block' }} />
-      </div>
-      <div className="text-side">
-        <img src="http://localhost:7777/uploads/newlogo.jpg" alt="Logo" className="logo" />
-        <p>הרגע הזה בו אתם מגישים פטיפור מרהיב ביופיו, מעניקים מארז מתנה עוצר נשימה ומזמינים את האורחים להתכבד בבר קינוחים נדיר ויוקרתי הוא רגע של אושר, רגע שבו הלב עולה על גדותיו והרצון לכבד ולהוקיר מובע באומנות ייחודית, נדירה ומדויקת ביצירות הקולינריות מבית מותג הפטיפורים וקינוחי הבוטיק  .</p>
-      </div>
-    </div>
-  );
-};
+//   return (
+//     <div className="homepage">
+//       <div className="image-slideshow">
+//         <img src={images[currentImageIndex]} alt="Delicious Cake" style={{ width: '100%', display: 'block' }} />
+//       </div>
+//       <div className="text-side">
+//         <img src="http://localhost:7777/uploads/newlogo.jpg" alt="Logo" className="logo" />
+//         <p>הרגע הזה בו אתם מגישים פטיפור מרהיב ביופיו, מעניקים מארז מתנה עוצר נשימה ומזמינים את האורחים להתכבד בבר קינוחים נדיר ויוקרתי הוא רגע של אושר, רגע שבו הלב עולה על גדותיו והרצון לכבד ולהוקיר מובע באומנות ייחודית, נדירה ומדויקת ביצירות הקולינריות מבית מותג הפטיפורים וקינוחי הבוטיק  .</p>
+//       </div>
+//     </div>
+//   );
+// };
 
-export default HomePage;
+// export default HomePage;
