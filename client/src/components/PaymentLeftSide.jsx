@@ -22,7 +22,6 @@ export default function PaymentLeftSide() {
     useEffect(() => {
         if(isSuccess){
             setProducts(allCart);
-            console.log(allCart);
         }
             
     }, [isSuccess]); 

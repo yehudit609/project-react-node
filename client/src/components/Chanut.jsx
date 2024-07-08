@@ -13,6 +13,8 @@ import { useGetAllProductQuery, useGetProductByCategoryQuery } from '../features
 import { useAddNewProdToBasketMutation } from '../features/basket/basketApiSlice';
 // import BasketDesign from "./BasketDesign"
 import { useNavigate, useParams } from 'react-router-dom';
+import { Toast } from 'primereact/toast';
+// import toast from ''
 export default function Chanut() {
     ///
     const [showDialog, setShowDialog] = useState(false);
@@ -50,7 +52,6 @@ export default function Chanut() {
 
     //******************************** */
 
-    // console.log("categoryyy: ",category);
     //לא למחוק!!!
     const { data, isLoading, isError, error, isSuccess } = useGetProductByCategoryQuery(category)
 
@@ -63,10 +64,7 @@ export default function Chanut() {
     useEffect(() => {
 
         if (isSuccess) {
-            // console.log(data);
             setProducts(data)
-
-
         }
         else
             console.log("loading");
@@ -111,7 +109,6 @@ export default function Chanut() {
         return (
 
             <div className="col-12" key={product.id}>
-                {/* {console.log(product)} */}
                 <div className={classNames('flex flex-column xl:flex-row xl:align-items-start p-4 gap-4', { 'border-top-1 surface-border': index !== 0 })}>
                     <img className="w-9 sm:w-16rem xl:w-10rem shadow-2 block xl:block mx-auto border-round" src={`http://localhost:7777/uploads/${product.image.split("\\")[2]}`} alt={product.name} />
                     <div className="flex flex-column sm:flex-row justify-content-between align-items-center xl:align-items-start flex-1 gap-4">
@@ -137,7 +134,6 @@ export default function Chanut() {
     };
 
     const gridItem = (product) => {
-        // { console.log(product) }
         return (
 
 
@@ -191,7 +187,6 @@ export default function Chanut() {
     };
 
     const hundleAddToCart = (product) => {
-        console.log("productFromChanut: " + product.price);
         let flag = false
         if (localStorage.getItem('token'))
             addProdToBasket({ "prodId": product._id })
@@ -217,11 +212,16 @@ export default function Chanut() {
                 let pro = { ...product, qty: 1 }
                 cart.push(pro)
             }
-
-            // console.log('carttt', cart);
             localStorage.setItem('cart', JSON.stringify(cart))
         }
-
+        
+        // const showSuccess = () => {
+    //        { <Toast ref={toast} />}
+    //    {<Button label="Success" severity="success" onClick={showSuccess} />} 
+    //         // toast.current.show({severity:'success', summary: 'Success', detail:'Message Content', life: 3000});
+    //     }
+        alert("פריט נוסף לסל בהצלחה")
+        // showSuccess()
     }
 
 

@@ -26,7 +26,6 @@ const PaymentRightSide = () => {
 
     let city, street, buildingNumber;
     const {userName, name, email, phone, isAdmin, isUser,address } = useAuth()
-    console.log("phoneeee: "+phone);
     city = address?.split(' ')[0]
     street = address?.split(' ')[1]
     buildingNumber = address?.split(' ')[2]

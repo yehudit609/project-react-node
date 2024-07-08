@@ -68,9 +68,7 @@ export default function BasketDesign() {
     const itemTemplate = (product, index) => {
         return (
             <>
-            {/* {console.log("product "+index+product.prodId?product.prodId.isAvailible:"")} */}
             <div className="col-12" key={product.id} >
-            {/* style={{ opacity: product.prodId && product.prodId.isAvailible ? 1 : 0.3 }} */}
                 <div className={classNames('flex flex-column xl:flex-row xl:align-items-start p-4 gap-4', { 'border-top-1 surface-border': index !== 0 })}>
                     <img className="w-9 sm:w-16rem xl:w-10rem shadow-2 block xl:block mx-auto border-round" src={`http://localhost:7777/uploads/${product.image}`} alt={product.name} />
                     <div className="flex flex-column sm:flex-row justify-content-between align-items-center xl:align-items-start flex-1 gap-4">
