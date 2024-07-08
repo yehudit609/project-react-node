@@ -1,0 +1,330 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color:#080808;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.card {
+  background:#080808;
+  padding: 2rem;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+  /* direction: rtl; */
+}
+
+.classSize{
+  width: 80%;
+  height: 80%;
+}
+
+.manager{
+  width: 30px;
+  height: 30px;
+  }
+  
+  .cent{
+    text-align: center;
+    direction: ltr;
+  }
+  
+  .pic{
+  width: 2px;
+  height: 2px;
+  }
+  
+
+
+.Button{
+  
+  border-color: aliceblue;
+  color: 'white'
+}
+
+
+/*homepage.css */
+/* .homepage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.image-slideshow {
+  width: 50%;
+  background-color: #000;
+  position: relative;
+}
+
+.image-slideshow img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 1;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.fade-in img {
+  opacity: 1;
+}
+
+.fade-out img {
+  opacity: 0;
+}
+
+.text-side {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background-color: #000;
+  color: #aa115e;
+  text-align: center;
+  font-family: 'Arial', sans-serif;
+}
+
+.logo {
+  width: 250px;
+  margin-bottom: 20px;
+}
+
+.text-content {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+  .homepage {
+    flex-direction: column;
+  }
+
+  .image-slideshow, .text-side {
+    width: 100%;
+  }
+
+  .text-side {
+    order: 1;
+  }
+} */
+.homepage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.image-slideshow {
+  width: 50%;
+  height: 90vh; /* Define a height for the slideshow to control the aspect ratio */
+  background-color: #000;
+  position: relative;
+  display: flex;
+  align-items: center; /* Center vertically */
+  justify-content: center; /* Center horizontally */
+}
+
+.image-slideshow img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensure the image covers the container */
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 1;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.fade-in img {
+  opacity: 1;
+}
+
+.fade-out img {
+  opacity: 0;
+}
+
+.text-side {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background-color: #000;
+  color: #aa115e;
+  text-align: center;
+  font-family: 'Arial', sans-serif;
+}
+
+.logo {
+  width: 250px;
+  margin-bottom: 20px;
+}
+
+.text-content {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+  .homepage {
+    flex-direction: column;
+  }
+
+  .image-slideshow, .text-side {
+    width: 100%;
+  }
+
+  .text-side {
+    order: 1;
+  }
+}
+/* payment.css */
+
+.payment-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #000; 
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: auto;
+  width: 70%;
+  max-width: 600px;
+}
+
+.payment-input {
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.payment-accordion {
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+@media (max-width: 768px) {
+  .payment-container {
+      width: 100%;
+      margin: 20px;
+  }
+}
+
+/* payment-placeholder.css */
+.payment-input ::placeholder { /* Targeting placeholders within elements with class 'payment-input' */
+  text-align: right;
+  direction: rtl; /* Right-to-left direction for proper alignment and handling in RTL languages */
+}
+
+.payment-input {
+  text-align: right; /* Ensures the input text is also right-aligned when typing */
+  direction: rtl; /* Ensures the direction is right-to-left */
+}
+
+.payment-textarea ::placeholder {
+  text-align: right;
+  direction: rtl;
+}
+
+.payment-textarea {
+  text-align: right;
+  direction: rtl;
+}
+
+
+
+/* Navbar.css */
+/* import './Navbar.css' */
+.p-menubar .p-menubar-root-list {
+  display: flex;
+  justify-content: center;
+  width: 100%; /* Ensures the flex container takes up the entire space of its parent */
+}
+
+.p-menubar .p-menubar-root-list > li {
+  flex-grow: 0; /* Ensures menu items do not grow to fill the space */
+}
+
+.p-menubar .p-menubar-start,
+.p-menubar .p-menubar-end {
+  flex-shrink: 0; /* Prevents logo and end components from shrinking */
+}
+
+/* orders.css */
+.product-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.product-table th, .product-table td {
+  padding: 8px;
+  text-align: right;
+  border-bottom: 1px solid #926079;
+}
+
+.product-table th {
+  background-color: #0a0909;
+}
+
+
+
+.total-price {
+  margin-top: 10px;
+  text-align: left;
+  font-weight: bold;
+  font-size: 1.2rem; /* Enlarge the font size */
+  color: #ebe0e5;   /* Change the color to make it stand out */
+}
+
+.rtl-container {
+  direction: rtl;
+}
+
+.header-content, .total-price {
+  text-align: right; /* Align header content to the right */
+}
+
+
+
+
+.rtl-container .p-datatable-rowgroup-header  .p-datatable-rowgroup-toggler {
+  margin-left: auto; /* Move the button to the right */
+}
+
+/* 
+/* styles.css */
+.tag-status {
+  padding: 0.3em 0.7em;
+  display: inline-block;
+  font-weight: bold;
+  color: #fff; 
+}
+
+.tag-betipul {
+  background-color: #32b5e4; 
+}
+
+.tag-baderech {
+  background-color: #1c934c; 
+}
+
+.tag-higiah {
+  background-color: #f903b8; 
+}
+
