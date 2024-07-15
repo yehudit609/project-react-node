@@ -71,7 +71,6 @@ const TablesM = () => {
     const [updateFunc] = useUpdateFurnitureMutation()
     const handleUpdateClick = (table) => {
         const formData = new FormData()
-        debugger
         formData.append("_id", table._id)
         formData.append("description", descriptionUpdate)
         formData.append("stock", stockUpdate)

@@ -168,20 +168,31 @@ export default function Chanut() {
     };
 
     const listTemplate = (products, layout) => {
+        if (!products || products.length === 0) {
+            return (
+                <div className="text-center  text-2xl" style={{backgroundColor:'#0a0909'}}>
+                אין פריטים בקטגוריה זו
+                </div>
+            );
+        }
+
         return <div className="grid grid-nogutter">{products.map((product, index) => itemTemplate(product, layout, index))}</div>;
     };
 
+   
     const header = () => {
+        if (!products || products.length === 0) {
+            return null;
+        }
         return (
             <>
-                <Dropdown options={sortOptions} value={sortKey} optionLabel="label" placeholder="Sort By Price" onChange={onSortChange} className="w-full sm:w-14rem" />,
+                <Dropdown options={sortOptions} value={sortKey} optionLabel="label" placeholder="Sort By Price" onChange={onSortChange} className="w-full sm:w-14rem" />
                 <div className="flex justify-content-end">
                     <DataViewLayoutOptions layout={layout} onChange={(e) => setLayout(e.value)} />
-                </div></>
-
+                </div>
+            </>
         );
     };
-
     const hundleAddToCart = (product) => {
         console.log("productFromChanut: " + product.price);
         let flag = false

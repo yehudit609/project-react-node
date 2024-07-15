@@ -140,7 +140,7 @@ const Login = () => {
                         </>
                     )}
                 />
-                <Button label="login" type="submit"  style={{ backgroundColor: 'black', color: 'white' }} /><br></br><br></br><br></br><br></br>
+                <Button label="התחברות" type="submit"  style={{ backgroundColor: 'black', color: 'white' }} /><br></br><br></br><br></br><br></br>
                 <div>👇עוד לא נרשמתם? הרשמו כאן</div><br></br>
                 <Button style={{ backgroundColor: 'black', color: 'white',width:'100px',margin:'auto' }}  onClick={()=>{navigate("/Register")} }>הרשמה</Button>
 

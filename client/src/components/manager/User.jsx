@@ -208,7 +208,7 @@ export default function User() {
     };
 
     const actionBodyTemplate12 = (rowData) => {
-        debugger
+        
         return (
             <React.Fragment>
                 {/* <Button icon="pi pi-pencil" rounded outlined className="mr-2" onClick={() => editUser(rowData)} /> */}

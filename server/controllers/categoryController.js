@@ -59,19 +59,22 @@ const updateCategory = async (req,res)=>{
 
 const deleteCategory = async (req,res)=>{
     const{id} = req.params
-    const productOnThisCayegory = await Product.find({category:id},{password:0})
-    if(productOnThisCayegory){
-        return res.status(400).json({message: 'You cannot delete this category because there are products of its type'})
-    }
-    
-    const category = await Category.findById(id).exec()
+    const productOnThisCategory = await Product.find({ category: id }, { password: 0 });
 
-    if(!category){
-        return res.status(400).json({message: 'category not found😪'})
-    }
-    await category.deleteOne()
-    const reply=`category ${category.name} ID ${category._id} deleted`
-    res.json(reply)
+        if (productOnThisCategory.length > 0) {
+            return res.status(400).json({ message: 'You cannot delete this category because there are products of its type' });
+        }
+        
+        const category = await Category.findById(id);
+
+        if (!category) {
+            return res.status(400).json({ message: 'Category not found' });
+        }
+
+        await category.deleteOne();
+
+        const reply = `Category ${category.name} ID ${category._id} deleted`;
+        res.json(reply);
 }
 
 module.exports={

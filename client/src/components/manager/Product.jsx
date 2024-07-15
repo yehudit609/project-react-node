@@ -136,7 +136,6 @@ export default function Product() {
             setProductDialog(false);
             setProduct(emptyProduct);
         }
-        window.location.reload(true)
     };
     //editttttttttttttttttt
     const editProduct = (product) => {

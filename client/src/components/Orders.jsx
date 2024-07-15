@@ -41,7 +41,7 @@ export default function Orders() {
                         {products.map((product, index) => (
                             <tr key={index}>
                                 <td>
-                                    <img alt={product.name} src={"http://localhost:7777/uploads/" + product.image} width="32" />
+                                    <img alt={product.name} src={"http://localhost:7777/uploads/" + product.image.split("\\")[2]} width="32" />
                                 </td>
                                 <td>{product.name}</td>
                                 <td>{product.quantity}</td>

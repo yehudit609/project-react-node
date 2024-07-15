@@ -126,6 +126,7 @@ export default function Category() {
 
     const deleteCategory1 = () => {
         deleteCategory(category._id)
+        
         refetch()
         setDeleteCategoryDialog(false);
         setCategory(emptyCategory);
@@ -184,7 +185,7 @@ export default function Category() {
     // };
 
     const onInputChange = (e, name) => {
-        // debugger
+        
         // console.log("onInputChange",e,name);
         const val = (e.target && e.target.value) || '';
         let _category = { ...category };
