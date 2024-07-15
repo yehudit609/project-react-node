@@ -55,7 +55,7 @@ export default function Product() {
 
     useEffect(() => {
         if (isSuccess) {
-            // console.log(products);
+            console.log(products);
         }
     }, [isSuccess]);
 
@@ -100,6 +100,7 @@ export default function Product() {
                     formData.append("image", selectedFile)
                     
                     const index = findIndexById(product._id);
+                    console.log("formDataaaaa: ", formData);
                     updateProd(formData)
                     refetch()
                     _products[index] = _product;
@@ -135,6 +136,7 @@ export default function Product() {
             setProductDialog(false);
             setProduct(emptyProduct);
         }
+        window.location.reload(true)
     };
     //editttttttttttttttttt
     const editProduct = (product) => {
@@ -149,6 +151,7 @@ export default function Product() {
         setProduct(product);
         setDeleteProductDialog(true);
         refetch()
+        
     };
 
     const deleteProduct = () => {
@@ -393,5 +396,6 @@ export default function Product() {
                 </div>
             </Dialog> */}
         </div>
+        
     );
 }

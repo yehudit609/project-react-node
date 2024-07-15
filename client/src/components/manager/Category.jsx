@@ -36,6 +36,7 @@ export default function Category() {
     const dt = useRef(null);
 
     const { data:categorys, isLoading, isError, error, isSuccess,refetch } = useGetAllCategoriesQuery()
+    console.log(categorys)
     // const { data:user, isLoading1, isError1, error1, isSuccess1 } = useGetUserByIdQuery()
     // const { data:allCategories=[], isLoading:isLoading2, isError:isError2, error:error2, isSuccess:isSuccess2,refetch:refetchCategories } = useGetAllCategoriesQuery()
 
@@ -47,9 +48,10 @@ export default function Category() {
 
     useEffect(() => {
         if(isSuccess){
-            // console.log("asdfffffffff",categorys);
+            console.log("asdfffffffff",categorys);
         }
     }, [isSuccess]);
+    // console.log(users)
 
     const formatCurrency = (value) => {
         return value.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
@@ -76,12 +78,17 @@ export default function Category() {
 
     const saveCategory = () => {
         setSubmitted(true);
+        
+        {console.log("saveCategory",category) } 
+        console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",category);
         if (category.name.trim()) {
+            console.log("category.name.trim()");
             let _categorys = [...categorys];
             let _category = { ...category };//category
 
             if (category._id) {
                 const index = findIndexById(category._id);
+                console.log("_categoryyyyyyyyyyyyyyyyyyyyyyyyy:   "+_category);
                 updateCategory(_category)
                 refetch()
                 _categorys[index] = _category;
@@ -92,6 +99,7 @@ export default function Category() {
                 // _user.image = 'user-placeholder.svg';
                 createCategory(_category)
                 refetch()
+                console.log("after creating prod!");
                 
                 _categorys.push(_category);
                 toast.current.show({ severity: 'success', summary: 'Successful', detail: 'category Created', life: 3000 });
@@ -100,19 +108,20 @@ export default function Category() {
             setCategoryDialog(false);
             setCategory(emptyCategory);
         }
+        window.location.reload(true)
     };
 //editttttttttttttttttt
     const editCategory = (category) => {
         setCategory({ ...category });
-        setCategoryDialog(true);        
+        setCategoryDialog(true);
     };
 
 //deleteeeeeeeeeeeeee
     const confirmDeleteCategory = (category) => {
+        // console.log("confirmDeleteProduct: ",product._id);
         setCategory(category);
         setDeleteCategoryDialog(true);
         refetch()
-        alert("קטגוריה נמחקה בהצלחה")
     };
 
     const deleteCategory1 = () => {
@@ -121,6 +130,7 @@ export default function Category() {
         setDeleteCategoryDialog(false);
         setCategory(emptyCategory);
         //אני רוצה לשים פה סוויט אלרט
+
         toast.current.show({ severity: 'success', summary: 'Successful', detail: 'Category Deleted', life: 3000 });
     };
 
@@ -166,6 +176,7 @@ export default function Category() {
     };
 
     // const onCategoryChange = (e) => {
+    //     // console.log("onCategoryChange: ",e.target.name._id);
     //     let _user = { ...user };
 
     //     _user['category'] = e.target.name._id;
@@ -173,6 +184,8 @@ export default function Category() {
     // };
 
     const onInputChange = (e, name) => {
+        // debugger
+        // console.log("onInputChange",e,name);
         const val = (e.target && e.target.value) || '';
         let _category = { ...category };
 
@@ -236,6 +249,7 @@ export default function Category() {
         </React.Fragment>
     );
     const onRoleChange = (e) => {
+        // console.log("onCategoryChange: ",e.target.name._id);
         let _category = { ...categorys };
 
         _category['roles'] = e.target.name._id;

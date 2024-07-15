@@ -41,6 +41,8 @@ function App() {
   
   
   const {isAdmin,name} = useAuth()
+  console.log(name);
+  console.log("isAdmin++++",isAdmin);
   return (
 
     <div className="App">  

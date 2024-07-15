@@ -29,7 +29,7 @@ function ContactForm() {
     e.preventDefault();
     const errors = validateForm();
     if (Object.keys(errors).length === 0) {
-      // console.log(formData);
+      console.log(formData);
       // כאן אתה יכול להוסיף לוגיקה לשליחת הטופס לשרת או להתמודד עם הנתונים באופן אחר
     } else {
       setFormErrors(errors);

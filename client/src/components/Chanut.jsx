@@ -3,6 +3,7 @@ import { Dropdown } from 'primereact/dropdown';
 //////////
 import { Dialog } from 'primereact/dialog';
 //////////
+import swal from 'sweetalert';
 // import { ProductService } from './service/ProductService2';
 import { Button } from 'primereact/button';
 import { DataView, DataViewLayoutOptions } from 'primereact/dataview';
@@ -13,8 +14,6 @@ import { useGetAllProductQuery, useGetProductByCategoryQuery } from '../features
 import { useAddNewProdToBasketMutation } from '../features/basket/basketApiSlice';
 // import BasketDesign from "./BasketDesign"
 import { useNavigate, useParams } from 'react-router-dom';
-import { Toast } from 'primereact/toast';
-// import toast from ''
 export default function Chanut() {
     ///
     const [showDialog, setShowDialog] = useState(false);
@@ -52,6 +51,7 @@ export default function Chanut() {
 
     //******************************** */
 
+    // console.log("categoryyy: ",category);
     //לא למחוק!!!
     const { data, isLoading, isError, error, isSuccess } = useGetProductByCategoryQuery(category)
 
@@ -62,24 +62,19 @@ export default function Chanut() {
     // const { data:allProduct, isLoading2,isError3, error3, isSuccess3 } = useGetAllProductQuery()//category
 
     useEffect(() => {
-
         if (isSuccess) {
+            // console.log(data);
             setProducts(data)
-        }
-        else
+        }else
             console.log("loading");
-
     }, [isSuccess]);
 
     const getSeverity = (product) => {
-        switch (product.inventoryStatus) {
-            case 'INSTOCK':
+        switch (product.isAvailible) {
+            case true:
                 return 'success';
 
-            case 'LOWSTOCK':
-                return 'warning';
-
-            case 'OUTOFSTOCK':
+            case false:
                 return 'danger';
 
             default:
@@ -109,6 +104,7 @@ export default function Chanut() {
         return (
 
             <div className="col-12" key={product.id}>
+                {/* {console.log(product)} */}
                 <div className={classNames('flex flex-column xl:flex-row xl:align-items-start p-4 gap-4', { 'border-top-1 surface-border': index !== 0 })}>
                     <img className="w-9 sm:w-16rem xl:w-10rem shadow-2 block xl:block mx-auto border-round" src={`http://localhost:7777/uploads/${product.image.split("\\")[2]}`} alt={product.name} />
                     <div className="flex flex-column sm:flex-row justify-content-between align-items-center xl:align-items-start flex-1 gap-4">
@@ -120,12 +116,12 @@ export default function Chanut() {
                                     <i className="pi pi-tag"></i>
                                     <span className="font-semibold">{product.category}</span>
                                 </span>
-                                <Tag value={product.inventoryStatus} severity={getSeverity(product)}></Tag>
+                                <Tag value={product.isAvailible} severity={getSeverity(product)}></Tag>
                             </div>
                         </div>
                         <div className="flex sm:flex-column align-items-center sm:align-items-end gap-3 sm:gap-2">
                             <span className="text-2xl font-semibold">${product.price}</span>
-                            <Button icon="pi pi-shopping-cart" className="p-button-rounded" disabled={product.inventoryStatus === 'OUTOFSTOCK'}></Button>
+                            <Button icon="pi pi-shopping-cart" className="p-button-rounded" disabled={product.isAvailible === false}></Button>
                         </div>
                     </div>
                 </div>
@@ -134,9 +130,9 @@ export default function Chanut() {
     };
 
     const gridItem = (product) => {
+        console.log(product);
         return (
-
-
+            
             <div className="col-12 sm:col-6 lg:col-12 xl:col-4 p-2" key={product.id}>
                 <div className="p-4 border-1 surface-border surface-card border-round">
                     <div className="flex flex-wrap align-items-center justify-content-between gap-2">
@@ -144,17 +140,17 @@ export default function Chanut() {
                             <i className="pi pi-tag"></i>
                             <span className="font-semibold">{product.category}</span>
                         </div>
-                        <Tag value={product.inventoryStatus} severity={getSeverity(product)}></Tag>
+                       {!product.isAvailible &&<Tag value="אזל מהמלאי" severity={getSeverity(product)}></Tag>} 
                     </div>
                     <div className="flex flex-column align-items-center gap-3 py-5">
-                        <img className="classSize" src={`http://localhost:7777/uploads/${product.image}`} alt={product.name} onClick={() => openDialog(product)} />
+                        <img className="classSize" src={`http://localhost:7777/uploads/${product.image.split("\\")[2]}`} alt={product.name} onClick={() => openDialog(product)} />
                         <div className="text-2xl font-bold">{product.name}</div>
                         <Rating value={product.rating} readOnly cancel={false}></Rating>
                     </div>
                     <div className="flex align-items-center justify-content-between">
                         <span className="text-2xl font-semibold">₪{product.price}</span>
                         {/* איקון עגלה */}
-                        <Button onClick={() => hundleAddToCart(product)} icon="pi pi-shopping-cart" className="p-button-rounded" disabled={product.inventoryStatus === 'OUTOFSTOCK'}></Button>
+                        <Button onClick={() => hundleAddToCart(product)} icon="pi pi-shopping-cart" className="p-button-rounded" disabled={product.isAvailible === false}></Button>
 
                     </div>
                 </div>
@@ -187,6 +183,7 @@ export default function Chanut() {
     };
 
     const hundleAddToCart = (product) => {
+        console.log("productFromChanut: " + product.price);
         let flag = false
         if (localStorage.getItem('token'))
             addProdToBasket({ "prodId": product._id })
@@ -212,16 +209,13 @@ export default function Chanut() {
                 let pro = { ...product, qty: 1 }
                 cart.push(pro)
             }
+           
+            // console.log('carttt', cart);
             localStorage.setItem('cart', JSON.stringify(cart))
-        }
+        } 
+        // alert("added!!!")
+        swal(`${product.name} נוסף לסל בהצלחה `," ","success")
         
-        // const showSuccess = () => {
-    //        { <Toast ref={toast} />}
-    //    {<Button label="Success" severity="success" onClick={showSuccess} />} 
-    //         // toast.current.show({severity:'success', summary: 'Success', detail:'Message Content', life: 3000});
-    //     }
-        alert("פריט נוסף לסל בהצלחה")
-        // showSuccess()
     }
 
 
@@ -240,7 +234,7 @@ export default function Chanut() {
                 dismissableMask
                 draggable={false}>
                 <div className="flex">
-                    <img src={`http://localhost:7777/uploads/${selectedProduct?.image}`} alt={selectedProduct?.name} style={{ maxWidth: '100%', maxHeight: '400px' }} />
+                    <img src={`http://localhost:7777/uploads/${selectedProduct?.image.split("\\")[2]}`} alt={selectedProduct?.name} style={{ maxWidth: '100%', maxHeight: '400px' }} />
                     <div className="p-4">
                         <h2>{selectedProduct?.name}</h2>
                         <p>{selectedProduct?.description}</p> {/* Assuming description is available */}

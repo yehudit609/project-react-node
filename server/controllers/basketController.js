@@ -49,30 +49,21 @@ const addNewProd = async (req, res) => {
 }
 
 const getAllCart = async (req, res) => {
-    console.log("gggggggggggggggggggggggggggggetAllCart");
-    console.log("gggggggggggggggggggggggggggggetAllCart");
-    console.log("gggggggggggggggggggggggggggggetAllCart");
-    console.log("gggggggggggggggggggggggggggggetAllCart");
-
-    //console.log(req.user)
     if (req.user) {
-        console.log("I am hereeeeeeeee");
-        const products = await Basket.find({ userId: req.user._id}).populate("prodId",{isAvailible:1})//, name: 1, 
-        
-        if (!products?.length) {
-            console.log("nooooooooooooooooooooooooo");
-            return res.status(400).json({ message: "No products in basket :(" })
+        const products = await Basket.find({ userId: req.user._id }).populate("prodId", { isAvailible: 1 });
+
+        // Filter out unavailable products
+        const availableProducts = products.filter(product => product.prodId && product.prodId.isAvailible);
+        console.log("Available products:", availableProducts);
+        if (!availableProducts.length) {
+            return res.status(400).json({ message: "No products in basket :(" });
         }
-        console.log(products[0]);
-        res.json(products)
-    }
-    else {
-        console.log("no token??????????????");
-        return res.send("no token")
 
+        res.json(availableProducts);
+    } else {
+        return res.send("no token");
     }
-
-}
+};
 
 const deleteProduct = async (req, res) => { 
 

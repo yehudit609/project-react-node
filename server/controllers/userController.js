@@ -48,27 +48,25 @@ const getUserById = async (req, res) => {
 }
 
 const updateUser = async (req, res) => {
-    const { _id, userName, password, name, email, phone, active,address } = req.body
-    if (!_id || !userName || !password || !name) {
+    const { _id, userName, name, email, phone, active, address} = req.body
+    if (!_id || !userName || !name) {
         return res.status(400).json({ message: 'fields are required!!🙁' })
     }
     const user = await User.findById(_id).exec()
     if (!user) {
         return res.status(400).json({ message: 'user not found😪😪' })
     }
-    console.log("ssssssssssssssssssssssssssssssssssssssssssss");
     // console.log(address);
-    user.address
+    // user.address
     // const address2 = `${address.city}  ${address.street}   ${address.building}`
     // console.log(address2);
     
     user.userName = userName,
-        user.password = password,
-        user.name = name,
-        user.email = email, 
-        user.phone = phone,
-        // user.address = address,
-        user.active = active
+    user.name = name,
+    user.email = email, 
+    user.phone = phone,
+    user.address = address,
+    user.active = active
 
     const updatedUser = await user.save()
 

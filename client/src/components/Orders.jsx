@@ -16,10 +16,10 @@ export default function Orders() {
     const { data: clientOrders, isLoading, isError, error, isSuccess, refetch } = useGetOrdersByIdQuery(_id);
 
     useEffect(() => {
-        // console.log("Orders of current user: ", clientOrders);
+        console.log("Orders of current user: ", clientOrders);
         if (isSuccess) {
             setOrders(clientOrders);
-            // console.log("set client orders");
+            console.log("set client orders");
         }
     }, [isSuccess]);
 

@@ -41,6 +41,7 @@ const Login = () => {
     };
 
     const onSubmit = (data) => {
+        // console.log("onSubmit",data);
         loginFunc(data)
         
         // data.value 
@@ -71,6 +72,8 @@ const Login = () => {
            
             
             toast.current.show({ severity: 'success', summary: 'משתמש נרשם בהצלחה', life: 3000 });
+        
+            console.log("isAdmin: ",isAdmin);
             if(!isAdmin && localStorage.getItem('cart') && localStorage.getItem('cart').length!=0)
             {
                 console.log("localStorage.getItem('cart').length"+localStorage.getItem('cart').length);
@@ -137,7 +140,7 @@ const Login = () => {
                         </>
                     )}
                 />
-                <Button label="התחברות" type="submit"  style={{ backgroundColor: 'black', color: 'white' }} /><br></br><br></br><br></br><br></br>
+                <Button label="login" type="submit"  style={{ backgroundColor: 'black', color: 'white' }} /><br></br><br></br><br></br><br></br>
                 <div>👇עוד לא נרשמתם? הרשמו כאן</div><br></br>
                 <Button style={{ backgroundColor: 'black', color: 'white',width:'100px',margin:'auto' }}  onClick={()=>{navigate("/Register")} }>הרשמה</Button>
 

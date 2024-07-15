@@ -21,7 +21,7 @@ const prodSchema = new mongoose.Schema({
         type: String
     },
     isAvailible:{
-        type:mongoose.Schema.Types.String,
+        type:Boolean,
         default: true
     }
 }, {

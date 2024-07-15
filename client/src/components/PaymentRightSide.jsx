@@ -9,7 +9,6 @@ import { InputText } from 'primereact/inputtext';
 import { InputTextarea } from "primereact/inputtextarea";
 import { Accordion, AccordionTab } from 'primereact/accordion';
 import { useNavigate } from 'react-router-dom';
-//import { useAddNewOrderMutation, useGetAllCartQuery, useDeleteAllBasketMutation } from '../features/apiSlices';
 import useAuth from '../hooks/useAuth';
 
 
@@ -26,6 +25,7 @@ const PaymentRightSide = () => {
 
     let city, street, buildingNumber;
     const {userName, name, email, phone, isAdmin, isUser,address } = useAuth()
+    console.log("phoneeee: "+phone);
     city = address?.split(' ')[0]
     street = address?.split(' ')[1]
     buildingNumber = address?.split(' ')[2]
