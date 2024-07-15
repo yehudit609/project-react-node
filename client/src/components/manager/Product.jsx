@@ -67,6 +67,7 @@ export default function Product() {
         setProduct(emptyProduct);
         setSubmitted(false);
         setProductDialog(true);
+        
     };
 
     const hideDialog = () => {
@@ -233,11 +234,14 @@ export default function Product() {
     };
 
     const leftToolbarTemplate = () => {
-        return (
+        return (<>
             <div className="flex flex-wrap gap-2">
                 <Button label="New" icon="pi pi-plus" severity="success" onClick={openNew} />
             </div>
+            
+             </>
         );
+       
     };
 
     const rightToolbarTemplate = () => {
@@ -277,6 +281,7 @@ export default function Product() {
         <React.Fragment>
             <Button label="Cancel" icon="pi pi-times" outlined onClick={hideDialog} />
             <Button label="Save" icon="pi pi-check" onClick={saveProduct} />
+          
         </React.Fragment>
     );
     const deleteProductDialogFooter = (

@@ -26,7 +26,7 @@ const addNewProd = async (req, res) => {
         console.log("not prodInBasket:(");
         const foundProd = await Product.findOne({ _id: prodId }).lean()//.populate("_id",{price:1})
 
-        let newProd = null
+        let newProd = null 
 
         if(quant){ //מדובר בהעברת הסל מהלוגין
             newProd = await Basket.create({ userId: req.user._id, prodId: prodId, price: foundProd.price*quant, name: foundProd.name, quantity:quant ,image:foundProd.image})

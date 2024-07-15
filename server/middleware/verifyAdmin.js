@@ -1,7 +1,6 @@
 
 
 const verifyAdmin = (req,res,next)=>{
-    console.log("verifyAdmin "+req.user.roles);
     if(req.user && req.user.roles === "Admin"){
         next()
     }

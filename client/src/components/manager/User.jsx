@@ -286,7 +286,7 @@ export default function User() {
                     <InputText id="name" value={user.name} onChange={(e) => onInputChange(e, 'name')} required autoFocus className={classNames({ 'p-invalid': submitted && !user.name })} />
                     {submitted && !user.name && <small className="p-error">Name is required.</small>}
                 </div>
-                <div className="field">
+               <div className="field">
                     <label htmlFor="password" className="font-bold">
                     Password
                     </label>
