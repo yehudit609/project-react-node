@@ -105,8 +105,6 @@ export default function ManagerOrders() {
 
     const onStatusChange = async (e, rowData) => {
         const newStatus = e.value;
-        console.log("e.value ",e.value);
-        console.log("rowData ",rowData._id);
         try {
             await updateOrderStatus({ id: rowData._id, status: newStatus });
             setOrders(prevOrders => prevOrders.map(order =>

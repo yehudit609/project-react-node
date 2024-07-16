@@ -14,7 +14,6 @@ import { useNavigate } from 'react-router-dom';
 import { Message } from 'primereact/message';
 
 const Register = () => {
-    console.log("Register");
     const [registerFunc, { isError, isSuccess, isLoading, data, error }] = useRegisterMutation()
 const [err409,setErr409]=useState(false)
     const toast = useRef(null);
@@ -167,7 +166,7 @@ const [err409,setErr409]=useState(false)
                 {console.log("before button")}
                 <br />
                 <br />
-                <Button label="register" type="submit" icon="pi pi-check" style={{ backgroundColor: 'black', color: 'white', borderColor: 'white' }} />
+                <Button label="הרשמה" type="submit" icon="pi pi-check" style={{ backgroundColor: 'black', color: 'white', borderColor: 'white' }} />
                 {/* onClick={()=>{registerFunc(data)}} */}
                 {err409? <Message  severity="error" text="duplicate" />:<></>}
 

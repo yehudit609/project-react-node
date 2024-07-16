@@ -1,18 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Dropdown } from 'primereact/dropdown';
-//////////
 import { Dialog } from 'primereact/dialog';
-//////////
 import swal from 'sweetalert';
-// import { ProductService } from './service/ProductService2';
 import { Button } from 'primereact/button';
 import { DataView, DataViewLayoutOptions } from 'primereact/dataview';
-import { Rating } from 'primereact/rating';
+// import { Rating } from 'primereact/rating';
 import { Tag } from 'primereact/tag';
 import { classNames } from 'primereact/utils';
 import { useGetAllProductQuery, useGetProductByCategoryQuery } from '../features/product/productApiSlice';
 import { useAddNewProdToBasketMutation } from '../features/basket/basketApiSlice';
-// import BasketDesign from "./BasketDesign"
 import { useNavigate, useParams } from 'react-router-dom';
 export default function Chanut() {
     ///
@@ -31,10 +27,10 @@ export default function Chanut() {
 
     const cart = JSON.parse(localStorage.getItem('cart')) || []
     const sortOptions = [
-        { label: 'Name Low to High', value: 'name' },
-        { label: 'Price High to Low', value: '!price' },
-        { label: 'Price Low to High', value: 'price' },
-        { label: 'Name High to Low', value: '!name' },
+        { label: 'מיין לפי שם בסדר עולה', value: 'name' },
+        { label: 'מיין לפי מחיר בסדר יורד', value: '!price' },
+        { label: 'מיין לפי מחיר בסדר עולה', value: 'price' },
+        { label: 'מיין לפי שם בסדר יורד', value: '!name' },
 
     ];
 
@@ -48,22 +44,10 @@ export default function Chanut() {
         setShowDialog(false);
         setSelectedProduct(null);
     };
-
-    //******************************** */
-
-    // console.log("categoryyy: ",category);
-    //לא למחוק!!!
     const { data, isLoading, isError, error, isSuccess } = useGetProductByCategoryQuery(category)
-
-    // const { data, isLoading, isError, error, isSuccess } = useGetAllProductQuery()
-
     const [addProdToBasket, { isError2, error2, isSuccess2, data2 }] = useAddNewProdToBasketMutation()
-
-    // const { data:allProduct, isLoading2,isError3, error3, isSuccess3 } = useGetAllProductQuery()//category
-
     useEffect(() => {
         if (isSuccess) {
-            // console.log(data);
             setProducts(data)
         }else
             console.log("loading");
@@ -104,13 +88,11 @@ export default function Chanut() {
         return (
 
             <div className="col-12" key={product.id}>
-                {/* {console.log(product)} */}
                 <div className={classNames('flex flex-column xl:flex-row xl:align-items-start p-4 gap-4', { 'border-top-1 surface-border': index !== 0 })}>
                     <img className="w-9 sm:w-16rem xl:w-10rem shadow-2 block xl:block mx-auto border-round" src={`http://localhost:7777/uploads/${product.image.split("\\")[2]}`} alt={product.name} />
                     <div className="flex flex-column sm:flex-row justify-content-between align-items-center xl:align-items-start flex-1 gap-4">
                         <div className="flex flex-column align-items-center sm:align-items-start gap-3">
                             <div className="text-2xl font-bold text-900">{product.name}</div>
-                            <Rating value={product.rating} readOnly cancel={false}></Rating>
                             <div className="flex align-items-center gap-3">
                                 <span className="flex align-items-center gap-2">
                                     <i className="pi pi-tag"></i>
@@ -130,7 +112,6 @@ export default function Chanut() {
     };
 
     const gridItem = (product) => {
-        console.log(product);
         return (
             
             <div className="col-12 sm:col-6 lg:col-12 xl:col-4 p-2" key={product.id}>
@@ -145,11 +126,9 @@ export default function Chanut() {
                     <div className="flex flex-column align-items-center gap-3 py-5">
                         <img className="classSize" src={`http://localhost:7777/uploads/${product.image.split("\\")[2]}`} alt={product.name} onClick={() => openDialog(product)} />
                         <div className="text-2xl font-bold">{product.name}</div>
-                        <Rating value={product.rating} readOnly cancel={false}></Rating>
                     </div>
                     <div className="flex align-items-center justify-content-between">
                         <span className="text-2xl font-semibold">₪{product.price}</span>
-                        {/* איקון עגלה */}
                         <Button onClick={() => hundleAddToCart(product)} icon="pi pi-shopping-cart" className="p-button-rounded" disabled={product.isAvailible === false}></Button>
 
                     </div>
@@ -186,7 +165,7 @@ export default function Chanut() {
         }
         return (
             <>
-                <Dropdown options={sortOptions} value={sortKey} optionLabel="label" placeholder="Sort By Price" onChange={onSortChange} className="w-full sm:w-14rem" />
+                <Dropdown options={sortOptions} value={sortKey} optionLabel="label" placeholder="מיין לפי" onChange={onSortChange} className="w-full sm:w-14rem" />
                 <div className="flex justify-content-end">
                     <DataViewLayoutOptions layout={layout} onChange={(e) => setLayout(e.value)} />
                 </div>
@@ -194,7 +173,6 @@ export default function Chanut() {
         );
     };
     const hundleAddToCart = (product) => {
-        console.log("productFromChanut: " + product.price);
         let flag = false
         if (localStorage.getItem('token'))
             addProdToBasket({ "prodId": product._id })
@@ -210,9 +188,7 @@ export default function Chanut() {
                 })
                 if (!flag) {
                     let pro1 = { ...product, qty: 1 }
-                    console.log("before push: ", cart);
                     cart.push(pro1)
-                    console.log("after push: ", cart);
 
                 }
             }
@@ -220,13 +196,9 @@ export default function Chanut() {
                 let pro = { ...product, qty: 1 }
                 cart.push(pro)
             }
-           
-            // console.log('carttt', cart);
             localStorage.setItem('cart', JSON.stringify(cart))
         } 
-        // alert("added!!!")
-        swal(`${product.name} נוסף לסל בהצלחה `," ","success")
-        
+        swal(`${product.name} נוסף לסל בהצלחה `," ","success")        
     }
 
 
@@ -248,9 +220,8 @@ export default function Chanut() {
                     <img src={`http://localhost:7777/uploads/${selectedProduct?.image.split("\\")[2]}`} alt={selectedProduct?.name} style={{ maxWidth: '100%', maxHeight: '400px' }} />
                     <div className="p-4">
                         <h2>{selectedProduct?.name}</h2>
-                        <p>{selectedProduct?.description}</p> {/* Assuming description is available */}
+                        <p>{selectedProduct?.description}</p>
                         <h3>Price: ${selectedProduct?.price}</h3>
-                        <Rating value={selectedProduct?.rating} readOnly cancel={false} />
                         <br></br>
                         <Button label="Add to Cart" icon="pi pi-shopping-cart" onClick={() => {hundleAddToCart(selectedProduct); closeDialog()}} />
                     </div>

@@ -41,11 +41,7 @@ const Login = () => {
     };
 
     const onSubmit = (data) => {
-        // console.log("onSubmit",data);
         loginFunc(data)
-        
-        // data.value 
-        // // && show();
         form.reset();
     };
 
@@ -57,8 +53,6 @@ const Login = () => {
     const moveItemsToDB = ()=>{
         //ליצור אוביקט סל מאוביקט המוצר שבלוקל הוסט ולשלוח לפונקצית יצירת מוצר
        cart?.map((e)=>{
-        
-        console.log(e);
         addProdToBasket({prodId:e._id,quant:e.qty})
         localStorage.removeItem("cart")
        })
@@ -68,15 +62,10 @@ const Login = () => {
 
     useEffect(() => {
         if (isSuccess) {
-            dispatch(setToken(data))
-           
-            
+            dispatch(setToken(data))   
             toast.current.show({ severity: 'success', summary: 'משתמש נרשם בהצלחה', life: 3000 });
-        
-            console.log("isAdmin: ",isAdmin);
             if(!isAdmin && localStorage.getItem('cart') && localStorage.getItem('cart').length!=0)
             {
-                console.log("localStorage.getItem('cart').length"+localStorage.getItem('cart').length);
                 moveItemsToDB()
                 Swal.fire({
                     title: "ראינו שיש פריטים בסל שלך",
@@ -102,7 +91,6 @@ const Login = () => {
                 navigate("/")
         }
         if(isError){
-            //<h1>{error}</h1>
         }
     }, [isSuccess])
 
@@ -117,16 +105,12 @@ const Login = () => {
                     rules={{ required: 'userName is required!' }}
                     render={({ field, fieldState }) => (
                         <>
-                            {/* <label htmlFor={field.name}>
-                                {/* Value */
-                            /* </label> */}
                             <InputText placeholder="userName" inputId={field.name} value={field.value} onChange={(e)=>field.onChange(e.target.value)}
                                 inputRef={field.ref} suggestions={items} completeMethod={search} className={classNames({ 'p-invalid': fieldState.error })} />
                             {getFormErrorMessage(field.name)}<br></br><br></br>
                         </>
                     )}
                 />
-                {/* input value-password */}
                 <Controller
                     name="password"
 

@@ -4,15 +4,10 @@ import './components/Login'
 import Login from './components/Login';
 import Navbar from './components/Navbar';
 import Payement from './components/Payement';
-
-
-import Manager from './components/Manager';
 import "primereact/resources/themes/arya-blue/theme.css"
 import "primereact/resources/primereact.min.css"
 import "primeicons/primeicons.css"
 import "primeflex/primeflex.css"
-
-
 import Register from './components/Register';
 import { Route, Routes } from "react-router-dom";
 import Chanut from './components/Chanut';
@@ -27,9 +22,7 @@ import BasketDesign from './components/BasketDesign';
 import { useEffect } from 'react';
 import useAuth from './hooks/useAuth';
 import HomePage from './components/HomePage';
-import PaymentRightSide from './components/PaymentRightSide';
 import Payment from './components/Payment';
-//import HomePage from './components/HomePage';
 import Category from './components/manager/Category'
 import Order from './components/manager/Order'
 import Product from './components/manager/Product'

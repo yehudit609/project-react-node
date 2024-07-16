@@ -78,17 +78,12 @@ export default function Category() {
 
     const saveCategory = () => {
         setSubmitted(true);
-        
-        {console.log("saveCategory",category) } 
-        console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",category);
         if (category.name.trim()) {
-            console.log("category.name.trim()");
             let _categorys = [...categorys];
             let _category = { ...category };//category
 
             if (category._id) {
-                const index = findIndexById(category._id);
-                console.log("_categoryyyyyyyyyyyyyyyyyyyyyyyyy:   "+_category);
+                const index = findIndexById(category._id)
                 updateCategory(_category)
                 refetch()
                 _categorys[index] = _category;
@@ -198,13 +193,13 @@ export default function Category() {
     const leftToolbarTemplate = () => {
         return (
             <div className="flex flex-wrap gap-2">
-                <Button label="New" icon="pi pi-plus" severity="success" onClick={openNew} />
+                <Button label="קטגוריה חדשה" icon="pi pi-plus" severity="success" onClick={openNew} />
             </div>
         );
     };
 
     const rightToolbarTemplate = () => {
-        return <Button label="Export" icon="pi pi-upload" className="p-button-help" onClick={exportCSV} />;
+        return <Button label="יצא קטגוריות" icon="pi pi-upload" className="p-button-help" onClick={exportCSV} />;
     };
 
     const priceBodyTemplate = (rowData) => {
@@ -227,26 +222,26 @@ export default function Category() {
             <h4 className="m-0">Manage Categories</h4>
             <span className="p-input-icon-left">
                 <i className="pi pi-search" />
-                <InputText type="search" onInput={(e) => setGlobalFilter(e.target.value)} placeholder="Search..." />
+                <InputText type="search" onInput={(e) => setGlobalFilter(e.target.value)} placeholder="...חיפוש" />
             </span>
         </div>
     );
     const categoryDialogFooter = (
         <React.Fragment>
-            <Button label="Cancel" icon="pi pi-times" outlined onClick={hideDialog} />
-            <Button label="Save" icon="pi pi-check" onClick={saveCategory} />
+            <Button label="ביטול" icon="pi pi-times" outlined onClick={hideDialog} />
+            <Button label="שמור" icon="pi pi-check" onClick={saveCategory} />
         </React.Fragment>
     );
     const deleteCategoryDialogFooter = (
         <React.Fragment>
-            <Button label="No" icon="pi pi-times" outlined onClick={hideDeleteCategoryDialog} />
-            <Button label="Yes" icon="pi pi-check" severity="danger" onClick={deleteCategory1} />
+            <Button label="לא" icon="pi pi-times" outlined onClick={hideDeleteCategoryDialog} />
+            <Button label="כן" icon="pi pi-check" severity="danger" onClick={deleteCategory1} />
         </React.Fragment>
     );
     const deleteCategorysDialogFooter = (
         <React.Fragment>
-            <Button label="No" icon="pi pi-times" outlined onClick={hideDeleteCategorysDialog} />
-            <Button label="Yes" icon="pi pi-check" severity="danger" onClick={deleteSelectedCategorys} />
+            <Button label="לא" icon="pi pi-times" outlined onClick={hideDeleteCategorysDialog} />
+            <Button label="כן" icon="pi pi-check" severity="danger" onClick={deleteSelectedCategorys} />
         </React.Fragment>
     );
     const onRoleChange = (e) => {
@@ -267,24 +262,19 @@ export default function Category() {
                 <DataTable ref={dt} value={categorys} selection={selectedCategorys} onSelectionChange={(e) => setSelectedCategorys(e.value)}
                         dataKey="id"  paginator rows={10} rowsPerPageOptions={[5, 10, 25]}
                         paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
-                        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} Categorys" globalFilter={globalFilter} header={header}>
-                    {/* <Column selectionMode="multiple" exportable={false}></Column> */}
+                        currentPageReportTemplate="מציג {first} עד {last} מתוך {totalRecords} קטגוריות" globalFilter={globalFilter} header={header}>
                     
-                    <Column field="name" header="Name" sortable style={{ minWidth: '16rem', margin:'auto'}}></Column>
-                    <Column field="description" header="Description" sortable style={{ minWidth: '16rem', margin:'auto'}}></Column>
-                    {/* <Column field="email" header="Email" sortable style={{ minWidth: '16rem', margin:'auto'}}></Column> */}
-                    {/* <Column field="roles" header="Roles" sortable style={{ minWidth: '16rem', margin:'auto'}}></Column> */}
-                    {/* <Column field="address" header="Address"  style={{ minWidth: '16rem', margin:'auto'}}></Column> */}
-                    {/* <Column field="active" header="Active" sortable style={{ minWidth: '16rem', margin:'auto'}}></Column> */}
+                    <Column field="name" header="שם קטגוריה" sortable style={{ minWidth: '16rem', margin:'auto'}}></Column>
+                    <Column field="description" header="תיאור" sortable style={{ minWidth: '16rem', margin:'auto'}}></Column>
                     <Column body={actionBodyTemplate} exportable={false} style={{ minWidth: '12rem' }}></Column>
                 </DataTable>
             </div>
 
-            <Dialog visible={categoryDialog} style={{ width: '32rem' }} breakpoints={{ '960px': '75vw', '641px': '90vw' }} header="Manager Details" modal className="p-fluid" footer={categoryDialogFooter} onHide={hideDialog}>
+            <Dialog visible={categoryDialog} style={{ width: '32rem' }} breakpoints={{ '960px': '75vw', '641px': '90vw' }} header="פרטי קטגוריה" modal className="p-fluid" footer={categoryDialogFooter} onHide={hideDialog}>
                 <div className="field">
                     {console.log("categoryyy",category)}
                     <label htmlFor="name" className="font-bold">
-                        Name
+                        שם
                     </label>
                     <InputText id="name" value={category.name} onChange={(e) => onInputChange(e, 'name')} required autoFocus className={classNames({ 'p-invalid': submitted && !category.name })} />
                     {submitted && !category.name && <small className="p-error">Name is required.</small>}
@@ -292,7 +282,7 @@ export default function Category() {
                 
                 <div className="field">
                     <label htmlFor="description" className="font-bold">
-                       Description
+                       תיאור
                     </label>
                     <InputText id="description" value={category.description} onChange={(e) => onInputChange(e, 'description')} required autoFocus className={classNames({ 'p-invalid': submitted && !category.description })} />
                     {submitted && !category.description && <small className="p-error">description is required.</small>}
@@ -300,12 +290,12 @@ export default function Category() {
                 
             </Dialog>
             
-            <Dialog visible={deleteCategoryDialog} style={{ width: '32rem' }} breakpoints={{ '960px': '75vw', '641px': '90vw' }} header="Confirm" modal footer={deleteCategoryDialogFooter} onHide={hideDeleteCategoryDialog}>
+            <Dialog visible={deleteCategoryDialog} style={{ width: '32rem' }} breakpoints={{ '960px': '75vw', '641px': '90vw' }} header="מחיקת קטגוריה" modal footer={deleteCategoryDialogFooter} onHide={hideDeleteCategoryDialog}>
                 <div className="confirmation-content">
                     <i className="pi pi-exclamation-triangle mr-3" style={{ fontSize: '2rem' }} />
                     {category && (
                         <span>
-                            Are you sure you want to delete <b>{category.name}</b>?
+                           ? האם אתה בטוח שברצונך למחוק את קטגוריה  <b>{category.name}</b>
                         </span>
                     )}
                 </div>

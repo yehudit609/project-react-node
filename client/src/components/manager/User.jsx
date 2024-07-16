@@ -175,19 +175,14 @@ export default function User() {
     const leftToolbarTemplate = () => {
         return (
             <div className="flex flex-wrap gap-2">
-                <Button label="New" icon="pi pi-plus" severity="success" onClick={openNew} />
+                <Button label="מנהל חדש" icon="pi pi-plus" severity="success" onClick={openNew} />
             </div>
         );
     };
 
     const rightToolbarTemplate = () => {
-        return <Button label="Export" icon="pi pi-upload" className="p-button-help" onClick={exportCSV} />;
+        return <Button label="יצא משתמשים" icon="pi pi-upload" className="p-button-help" onClick={exportCSV} />;
     };
-
-    const priceBodyTemplate = (rowData) => {
-        return formatCurrency(rowData.price);
-    };
-
     
     const actionBodyTemplate = (rowData) => {
         if(rowData.roles=="Admin"){
@@ -200,7 +195,6 @@ export default function User() {
         else{
             return (
                 <React.Fragment>
-                    {/* <Button icon="pi pi-pencil" rounded outlined className="mr-2" onClick={() => editUser(rowData)} /> */}
                     <Button icon="pi pi-trash" rounded outlined severity="danger" onClick={() => confirmDeleteUser(rowData)} />
                 </React.Fragment>
             )
@@ -219,29 +213,29 @@ export default function User() {
 
     const header = (
         <div className="flex flex-wrap gap-2 align-items-center justify-content-between">
-            <h4 className="m-0">Manage Users</h4>
+            <h4 className="m-0">נהל משתמשים</h4>
             <span className="p-input-icon-left">
                 <i className="pi pi-search" />
-                <InputText type="search" onInput={(e) => setGlobalFilter(e.target.value)} placeholder="Search..." />
+                <InputText type="search" onInput={(e) => setGlobalFilter(e.target.value)} placeholder="...חיפוש" />
             </span>
         </div>
     );
     const userDialogFooter = (
         <React.Fragment>
-            <Button label="Cancel" icon="pi pi-times" outlined onClick={hideDialog} />
-            <Button label="Save" icon="pi pi-check" onClick={saveUser} />
+            <Button label="ביטול" icon="pi pi-times" outlined onClick={hideDialog} />
+            <Button label="שמור" icon="pi pi-check" onClick={saveUser} />
         </React.Fragment>
     );
     const deleteUserDialogFooter = (
         <React.Fragment>
-            <Button label="No" icon="pi pi-times" outlined onClick={hideDeleteUserDialog} />
-            <Button label="Yes" icon="pi pi-check" severity="danger" onClick={deleteUser1} />
+            <Button label="לא" icon="pi pi-times" outlined onClick={hideDeleteUserDialog} />
+            <Button label="כן" icon="pi pi-check" severity="danger" onClick={deleteUser1} />
         </React.Fragment>
     );
     const deleteUsersDialogFooter = (
         <React.Fragment>
-            <Button label="No" icon="pi pi-times" outlined onClick={hideDeleteUsersDialog} />
-            <Button label="Yes" icon="pi pi-check" severity="danger" onClick={deleteSelectedUsers} />
+            <Button label="לא" icon="pi pi-times" outlined onClick={hideDeleteUsersDialog} />
+            <Button label="כן" icon="pi pi-check" severity="danger" onClick={deleteSelectedUsers} />
         </React.Fragment>
     );
     const onRoleChange = (e) => {
@@ -262,12 +256,12 @@ export default function User() {
                 <DataTable ref={dt} value={users} selection={selectedUsers} onSelectionChange={(e) => setSelectedUsers(e.value)}
                         dataKey="id"  paginator rows={10} rowsPerPageOptions={[5, 10, 25]}
                         paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
-                        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} users" globalFilter={globalFilter} header={header}>
+                        currentPageReportTemplate="מציג {first} עד {last} מתוך {totalRecords} משתמשים" globalFilter={globalFilter} header={header}>
                     
-                    <Column field="name" header="Name" sortable style={{ minWidth: '16rem', margin:'auto'}}></Column>
-                    <Column field="userName" header="UserName" sortable style={{ minWidth: '16rem', margin:'auto'}}></Column>
-                    <Column field="email" header="Email" sortable style={{ minWidth: '16rem', margin:'auto'}}></Column>
-                    <Column field="roles" header="Roles" sortable style={{ minWidth: '16rem', margin:'auto'}}></Column>
+                    <Column field="name" header="שם" sortable style={{ minWidth: '16rem', margin:'auto'}}></Column>
+                    <Column field="userName" header="שם משתמש" sortable style={{ minWidth: '16rem', margin:'auto'}}></Column>
+                    <Column field="email" header="אימייל" sortable style={{ minWidth: '16rem', margin:'auto'}}></Column>
+                    <Column field="roles" header="סטטוס" sortable style={{ minWidth: '16rem', margin:'auto'}}></Column>
                  
                     {console.log("user: ",user," toast ",toast)}
                     {console.log("users: ",users)}
@@ -281,61 +275,40 @@ export default function User() {
                 <div className="field">
                     {console.log("userrrr",user)}
                     <label htmlFor="name" className="font-bold">
-                        Name
+                        שם
                     </label>
                     <InputText id="name" value={user.name} onChange={(e) => onInputChange(e, 'name')} required autoFocus className={classNames({ 'p-invalid': submitted && !user.name })} />
                     {submitted && !user.name && <small className="p-error">Name is required.</small>}
                 </div>
                <div className="field">
                     <label htmlFor="password" className="font-bold">
-                    Password
+                    סיסמא
                     </label>
                     <InputText id="password" value={user.password} onChange={(e) => onInputChange(e, 'password')} required autoFocus className={classNames({ 'p-invalid': submitted && !user.password })} />
                     {submitted && !user.password && <small className="p-error">password is required.</small>}
                 </div>
                 <div className="field">
                     <label htmlFor="userName" className="font-bold">
-                       UserName
+                       שם משתמש
                     </label>
                     <InputText id="userName" value={user.userName} onChange={(e) => onInputChange(e, 'userName')} required autoFocus className={classNames({ 'p-invalid': submitted && !user.userName })} />
                     {submitted && !user.name && <small className="p-error">userName is required.</small>}
                 </div>
                 <div className="field">
                     <label htmlFor="email" className="font-bold">
-                       Email
+                       אימייל
                     </label>
                     <InputText id="email" value={user.email} onChange={(e) => onInputChange(e, 'email')} required autoFocus className={classNames({ 'p-invalid': submitted && !user.email })} />
                     {submitted && !user.name && <small className="p-error">Email is required.</small>}
                 </div>
-                {/* <div className="field">
-                    <label htmlFor="address" className="font-bold">
-                       Address
-                    </label>
-                    <InputText id="address" value={user.address} onChange={(e) => onInputChange(e, 'address')} required autoFocus className={classNames({ 'p-invalid': submitted && !user.name })} />
-                    {submitted && !user.name && <small className="p-error">Address is required.</small>}
-                </div> */}
-                {/* <div className="field">
-                    <label htmlFor="roles" className="font-bold">
-                       Role
-                    </label>
-                    <InputText id="roles" value={user.roles} onChange={(e) => onInputChange(e, 'roles')} required autoFocus className={classNames({ 'p-invalid': submitted && !user.name })} />
-                    {submitted && !user.name && <small className="p-error">roles is required.</small>}
-                </div> */}
-                {/* <div className="field-radiobutton col-6">
-                            <RadioButton inputId="User" name="user" value="User" onChange={onRoleChange} checked={user.roles === 'User'} />
-                            <label htmlFor="User">User</label>
-                        </div>
-                        <div className="field-radiobutton col-6">
-                            <RadioButton inputId="Admin" name="Admin" value="Admin" onChange={onRoleChange} checked={user.roles === 'Admin'} />
-                            <label htmlFor="Admin">Admin</label>
-                        </div> */}
+               
             </Dialog>
-            <Dialog visible={deleteUserDialog} style={{ width: '32rem' }} breakpoints={{ '960px': '75vw', '641px': '90vw' }} header="Confirm" modal footer={deleteUserDialogFooter} onHide={hideDeleteUserDialog}>
+            <Dialog visible={deleteUserDialog} style={{ width: '32rem' }} breakpoints={{ '960px': '75vw', '641px': '90vw' }} header="מחיקת משתמש" modal footer={deleteUserDialogFooter} onHide={hideDeleteUserDialog}>
                 <div className="confirmation-content">
                     <i className="pi pi-exclamation-triangle mr-3" style={{ fontSize: '2rem' }} />
                     {user && (
                         <span>
-                            Are you sure you want to delete <b>{user.name}</b>?
+                           ? האם אתה בטוח שברצונך למחוק את משתמש <b>{user.name}</b>?
                         </span>
                     )}
                 </div>

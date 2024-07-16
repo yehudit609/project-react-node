@@ -236,7 +236,7 @@ export default function Product() {
     const leftToolbarTemplate = () => {
         return (<>
             <div className="flex flex-wrap gap-2">
-                <Button label="New" icon="pi pi-plus" severity="success" onClick={openNew} />
+                <Button label="מוצר חדש" icon="pi pi-plus" severity="success" onClick={openNew} />
             </div>
             
              </>
@@ -245,7 +245,7 @@ export default function Product() {
     };
 
     const rightToolbarTemplate = () => {
-        return <Button label="Export" icon="pi pi-upload" className="p-button-help" onClick={exportCSV} />;
+        return <Button label="יצא מוצרים" icon="pi pi-upload" className="p-button-help" onClick={exportCSV} />;
     };
 
     const imageBodyTemplate = (rowData) => {
@@ -273,27 +273,27 @@ export default function Product() {
             <h4 className="m-0">Manage Products</h4>
             <span className="p-input-icon-left">
                 <i className="pi pi-search" />
-                <InputText type="search" onInput={(e) => setGlobalFilter(e.target.value)} placeholder="Search..." />
+                <InputText type="search" onInput={(e) => setGlobalFilter(e.target.value)} placeholder="...חיפוש" />
             </span>
         </div>
     );
     const productDialogFooter = (
         <React.Fragment>
-            <Button label="Cancel" icon="pi pi-times" outlined onClick={hideDialog} />
-            <Button label="Save" icon="pi pi-check" onClick={saveProduct} />
+            <Button label="ביטול" icon="pi pi-times" outlined onClick={hideDialog} />
+            <Button label="שמור" icon="pi pi-check" onClick={saveProduct} />
           
         </React.Fragment>
     );
     const deleteProductDialogFooter = (
         <React.Fragment>
-            <Button label="No" icon="pi pi-times" outlined onClick={hideDeleteProductDialog} />
-            <Button label="Yes" icon="pi pi-check" severity="danger" onClick={deleteProduct} />
+            <Button label="לא" icon="pi pi-times" outlined onClick={hideDeleteProductDialog} />
+            <Button label="כן" icon="pi pi-check" severity="danger" onClick={deleteProduct} />
         </React.Fragment>
     );
     const deleteProductsDialogFooter = (
         <React.Fragment>
-            <Button label="No" icon="pi pi-times" outlined onClick={hideDeleteProductsDialog} />
-            <Button label="Yes" icon="pi pi-check" severity="danger" onClick={deleteSelectedProducts} />
+            <Button label="לא" icon="pi pi-times" outlined onClick={hideDeleteProductsDialog} />
+            <Button label="כן" icon="pi pi-check" severity="danger" onClick={deleteSelectedProducts} />
         </React.Fragment>
     );
 
@@ -306,35 +306,35 @@ export default function Product() {
                 <DataTable ref={dt} value={products} selection={selectedProducts} onSelectionChange={(e) => setSelectedProducts(e.value)}
                     dataKey="id" paginator rows={10} rowsPerPageOptions={[5, 10, 25]}
                     paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
-                    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} products" globalFilter={globalFilter} header={header}>
+                    currentPageReportTemplate="מציג {first} עד {last} מתוך {totalRecords} מוצרים" globalFilter={globalFilter} header={header}>
                     {/* <Column selectionMode="multiple" exportable={false}></Column> */}
-                    <Column field="name" header="Name" sortable style={{ minWidth: '16rem', margin: 'auto' }}></Column>
-                    <Column field="image" header="Image" body={imageBodyTemplate}></Column>
-                    <Column field="price" header="Price" body={priceBodyTemplate} sortable style={{ minWidth: '8rem' }}></Column>
-                    <Column field="category.name" header="Category" sortable style={{ minWidth: '10rem' }}></Column>
+                    <Column field="name" header="שם מוצר" sortable style={{ minWidth: '16rem', margin: 'auto' }}></Column>
+                    <Column field="image" header="תמונה" body={imageBodyTemplate}></Column>
+                    <Column field="price" header="מחיר" body={priceBodyTemplate} sortable style={{ minWidth: '8rem' }}></Column>
+                    <Column field="category.name" header="קטגוריה" sortable style={{ minWidth: '10rem' }}></Column>
                     <Column body={actionBodyTemplate} exportable={false} style={{ minWidth: '12rem' }}></Column>
                 </DataTable>
             </div>
 
-            <Dialog visible={productDialog} style={{ width: '32rem' }} breakpoints={{ '960px': '75vw', '641px': '90vw' }} header="Product Details" modal className="p-fluid" footer={productDialogFooter} onHide={hideDialog}>
+            <Dialog visible={productDialog} style={{ width: '32rem' }} breakpoints={{ '960px': '75vw', '641px': '90vw' }} header="פרטי מוצר" modal className="p-fluid" footer={productDialogFooter} onHide={hideDialog}>
                 {/* {product} */}
                 {product.image && <img width='300px' src={`http://localhost:7777/uploads/${product?.image}`} alt={product.image} className="product-image block m-auto pb-3" />}
                 <div className="field">
                     <label htmlFor="name" className="font-bold">
-                        Name
+                        שם מוצר
                     </label>
                     <InputText id="name" value={product.name} onChange={(e) => onInputChange(e, 'name')} required autoFocus className={classNames({ 'p-invalid': submitted && !product.name })} />
                     {submitted && !product.name && <small className="p-error">Name is required.</small>}
                 </div>
                 <div className="field">
                     <label htmlFor="description" className="font-bold">
-                        Description
+                        תיאור
                     </label>
                     <InputTextarea id="description" value={product.description} onChange={(e) => onInputChange(e, 'description')} required rows={3} cols={20} />
                 </div>
 
                 <div className="field">
-                    <label className="mb-3 font-bold">Category</label>
+                    <label className="mb-3 font-bold">קטגוריה</label>
                     {/*מעבר על כל הקטגוריות ע"מ לבחור מתוכן את הקטגוריה המתאימה */}
                     <div className="formgrid grid">
                         {allCategories.map(category => {
@@ -345,34 +345,14 @@ export default function Product() {
                                     <label htmlFor="category1">{category.name}</label>
                                 </div>)
                         })}
-                        {/*                     
-                        <div className="field-radiobutton col-6">
-                            <RadioButton inputId="category2" name="category" value="ShowcaseCakes" onChange={onCategoryChange} checked={product.category === 'ShowcaseCakes'} />
-                            <label htmlFor="category2">ShowcaseCakes</label>
-                        </div>
-                        <div className="field-radiobutton col-6">
-                            <RadioButton inputId="category3" name="category" value="GlutenFree" onChange={onCategoryChange} checked={product.category === 'GlutenFree'} />
-                            <label htmlFor="category3">GlutenFree</label>
-                        </div>
-                        <div className="field-radiobutton col-6">
-                            <RadioButton inputId="category4" name="category" value="Barim" onChange={onCategoryChange} checked={product.category === 'Barim'} />
-                            <label htmlFor="category4">Barim</label>
-                        </div>
-                        <div className="field-radiobutton col-6">
-                            <RadioButton inputId="category4" name="category" value="Cakes" onChange={onCategoryChange} checked={product.category === 'Cakes'} />
-                            <label htmlFor="category4">Cakes</label>
-                        </div>
-                        <div className="field-radiobutton col-6">
-                            <RadioButton inputId="category4" name="category" value="FruitDesigns" onChange={onCategoryChange} checked={product.category === 'FruitDesigns'} />
-                            <label htmlFor="category4">FruitDesigns</label>
-                        </div> */}
+                       
                     </div>
                 </div>
 
                 <div className="formgrid grid">
                     <div className="field col">
                         <label htmlFor="price" className="font-bold">
-                            Price
+                            מחיר
                         </label>
                         <InputNumber id="price" value={product.price} onValueChange={(e) => onInputNumberChange(e, 'price')} mode="currency" currency="USD" locale="en-US" />
                     </div>
@@ -382,24 +362,19 @@ export default function Product() {
                 ></input>
             </Dialog>
 
-            <Dialog visible={deleteProductDialog} style={{ width: '32rem' }} breakpoints={{ '960px': '75vw', '641px': '90vw' }} header="Confirm" modal footer={deleteProductDialogFooter} onHide={hideDeleteProductDialog}>
+            <Dialog visible={deleteProductDialog} style={{ width: '32rem' }} breakpoints={{ '960px': '75vw', '641px': '90vw' }} header="מחיקת מוצר" modal footer={deleteProductDialogFooter} onHide={hideDeleteProductDialog}>
                 <div className="confirmation-content">
                     <i className="pi pi-exclamation-triangle mr-3" style={{ fontSize: '2rem' }} />
                     {product && (
                         <span>
-                            Are you sure you want to delete <b>{product.name}</b>?
+                           ? האם אתה בטוח שברצונך למחוק את מוצר  <b>{product.name}</b>?
                         </span>
                     )}
                 </div>
             </Dialog>
 
-            {/* <Dialog visible={deleteProductsDialog} style={{ width: '32rem' }} breakpoints={{ '960px': '75vw', '641px': '90vw' }} header="Confirm" modal footer={deleteProductsDialogFooter} onHide={hideDeleteProductsDialog}>
-                <div className="confirmation-content">
-                    <i className="pi pi-exclamation-triangle mr-3" style={{ fontSize: '2rem' }} />
-                    {product && <span>Are you sure you want to delete the selected products?</span>}
-                </div>
-            </Dialog> */}
+          
         </div>
         
-    );
+    )
 }
