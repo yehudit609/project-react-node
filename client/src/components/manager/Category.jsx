@@ -1,7 +1,7 @@
 
 
 import React, { useState, useEffect, useRef } from 'react';
-import { classNames } from 'primereact/utils';
+import { classNames, ZIndexUtils } from 'primereact/utils';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { Toast } from 'primereact/toast';
@@ -87,7 +87,7 @@ export default function Category() {
                 updateCategory(_category)
                 refetch()
                 _categorys[index] = _category;
-                toast.current.show({ severity: 'success', summary: 'Successful', detail: 'category Updated', life: 3000 });
+                toast.current.show({ severity: 'success', summary: 'Successful', detail: 'category Updated', life: 3000 ,ZIndexUtils:100000});
             } 
             else {
                 //_user._id = createId();

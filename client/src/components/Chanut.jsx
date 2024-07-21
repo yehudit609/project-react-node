@@ -5,7 +5,7 @@ import swal from 'sweetalert';
 import { Button } from 'primereact/button';
 import { DataView, DataViewLayoutOptions } from 'primereact/dataview';
 // import { Rating } from 'primereact/rating';
-import { Tag } from 'primereact/tag';
+// import { Tag } from 'primereact/tag';
 import { classNames } from 'primereact/utils';
 import { useGetAllProductQuery, useGetProductByCategoryQuery } from '../features/product/productApiSlice';
 import { useAddNewProdToBasketMutation } from '../features/basket/basketApiSlice';
@@ -95,10 +95,10 @@ export default function Chanut() {
                             <div className="text-2xl font-bold text-900">{product.name}</div>
                             <div className="flex align-items-center gap-3">
                                 <span className="flex align-items-center gap-2">
-                                    <i className="pi pi-tag"></i>
-                                    <span className="font-semibold">{product.category}</span>
+                                    {/* <i className="pi pi-tag"></i> */}
+                                    {/* <span className="font-semibold">{product.category}</span> */}
                                 </span>
-                                <Tag value={product.isAvailible} severity={getSeverity(product)}></Tag>
+                                {/* <Tag value={product.isAvailible} severity={getSeverity(product)}></Tag> */}
                             </div>
                         </div>
                         <div className="flex sm:flex-column align-items-center sm:align-items-end gap-3 sm:gap-2">
@@ -114,14 +114,14 @@ export default function Chanut() {
     const gridItem = (product) => {
         return (
             
-            <div className="col-12 sm:col-6 lg:col-12 xl:col-4 p-2" key={product.id}>
+            <div className="col-12 sm:col-6 lg:col-12 xl:col-4 p-2" key={product}>
                 <div className="p-4 border-1 surface-border surface-card border-round">
                     <div className="flex flex-wrap align-items-center justify-content-between gap-2">
                         <div className="flex align-items-center gap-2">
-                            <i className="pi pi-tag"></i>
-                            <span className="font-semibold">{product.category}</span>
+                            {/* <i className="pi pi-tag"></i> */}
+                            {/* <span className="font-semibold">{product.category}</span> */}
                         </div>
-                       {!product.isAvailible &&<Tag value="אזל מהמלאי" severity={getSeverity(product)}></Tag>} 
+                       {/* {!product.isAvailible &&<Tag value="אזל מהמלאי" severity={getSeverity(product)}></Tag>}  */}
                     </div>
                     <div className="flex flex-column align-items-center gap-3 py-5">
                         <img className="classSize" src={`http://localhost:7777/uploads/${product.image.split("\\")[2]}`} alt={product.name} onClick={() => openDialog(product)} />
@@ -221,9 +221,9 @@ export default function Chanut() {
                     <div className="p-4">
                         <h2>{selectedProduct?.name}</h2>
                         <p>{selectedProduct?.description}</p>
-                        <h3>Price: ${selectedProduct?.price}</h3>
+                        <h3>מחיר: ₪{selectedProduct?.price}</h3>
                         <br></br>
-                        <Button label="Add to Cart" icon="pi pi-shopping-cart" onClick={() => {hundleAddToCart(selectedProduct); closeDialog()}} />
+                        <Button label="הוסף לסל" icon="pi pi-shopping-cart" onClick={() => {hundleAddToCart(selectedProduct); closeDialog()}} />
                     </div>
                 </div>
             </Dialog>

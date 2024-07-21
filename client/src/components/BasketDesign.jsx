@@ -129,7 +129,7 @@ export default function BasketDesign() {
 
     return (
         <>
-            <Button style={{ position: 'sticky', top: 170, zIndex: 10000, backgroundColor: 'black', color: 'white' }} disabled={ableCloseOrder} onClick={() => {localStorage.getItem('token') ? navigate("/Payment", { state: { products } }) : navigate("/Login") 
+            <Button style={{ position: 'sticky', top: 170, zIndex: 10000, backgroundColor: 'black', color: 'white' }} disabled={ableCloseOrder} onClick={() => {localStorage.getItem('token') ? navigate("/Payment", { state: { products } }) : <>{navigate("/Login")}{alert("הינך מועבר להרשמה")}</> 
  }}>לסגירת הזמנה</Button>
             <div className="card" style={{ width: 1000, margin: "Auto" }}>
                 <DataView value={products} listTemplate={listTemplate} />

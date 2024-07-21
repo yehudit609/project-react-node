@@ -76,13 +76,13 @@ const [err409,setErr409]=useState(false)
                 <Controller
                     name="userName"
                     control={form.control}
-                    rules={{ required: 'userName is required!' }}
+                    rules={{ required: '!נדרש שם משתמש' }}
                     render={({ field, fieldState }) => (
                         <>
                             {/* <label htmlFor={field.name}>
                                 {/* Value */
                             /* </label> */}
-                            <InputText placeholder="userName" inputId={field.name} value={field.value} onChange={field.onChange}
+                            <InputText placeholder="שם משתמש" inputId={field.name} value={field.value} onChange={field.onChange}
                                 inputRef={field.ref} suggestions={items} completeMethod={search} className={classNames({ 'p-invalid': fieldState.error })} />
                             {getFormErrorMessage(field.name)}<br></br><br></br>
                         </>
@@ -92,13 +92,13 @@ const [err409,setErr409]=useState(false)
                 <Controller
                     name="name"
                     control={form.control}
-                    rules={{ required: 'name is required!' }}
+                    rules={{ required: '!נדרש שם' }}
                     render={({ field, fieldState }) => (
                         <>
                             {/* <label htmlFor={field.name}>
                                 {/* Value */
                             /* </label> */}
-                            <InputText placeholder="name" inputId={field.name} value={field.value} onChange={field.onChange}
+                            <InputText placeholder="שם" inputId={field.name} value={field.value} onChange={field.onChange}
                                 inputRef={field.ref} suggestions={items} completeMethod={search} className={classNames({ 'p-invalid': fieldState.error })} />
                             {getFormErrorMessage(field.name)}<br></br><br></br>
                         </>
@@ -109,10 +109,10 @@ const [err409,setErr409]=useState(false)
                     name="password"
 
                     control={form.control}
-                    rules={{ required: 'password is required!' }}
+                    rules={{ required: '!נדרשת סיסמא' }}
                     render={({ field, fieldState }) => (
                         <>
-                            <Password toggleMask type="password" placeholder="password" inputId={field.name} value={field.value} onChange={field.onChange}
+                            <Password toggleMask type="סיסמא" placeholder="password" inputId={field.name} value={field.value} onChange={field.onChange}
                                 inputRef={field.ref} suggestions={items} completeMethod={search} className={classNames({ 'p-invalid': fieldState.error })} />
                             {getFormErrorMessage(field.name)}<br></br><br></br>
                         </>
@@ -122,10 +122,10 @@ const [err409,setErr409]=useState(false)
                 <Controller
                     name="email"
                     control={form.control}
-                    rules={{ required: 'email is required!' }}
+                    rules={{ required: '!נדרש אימייל' }}
                     render={({ field, fieldState }) => (
                         <>
-                            <InputText placeholder="email" inputId={field.name} value={field.value} onChange={field.onChange}
+                            <InputText placeholder="אימייל" inputId={field.name} value={field.value} onChange={field.onChange}
                                 inputRef={field.ref} suggestions={items} completeMethod={search} className={classNames({ 'p-invalid': fieldState.error })} />
                             {getFormErrorMessage(field.name)}<br></br><br></br>
                         </>
@@ -137,7 +137,7 @@ const [err409,setErr409]=useState(false)
                     control={form.control}
                     render={({ field, fieldState }) => (
                         <>
-                            <InputText placeholder="phone" inputId={field.name} value={field.value} onChange={field.onChange}
+                            <InputText placeholder="טלפון" inputId={field.name} value={field.value} onChange={field.onChange}
                                 inputRef={field.ref} suggestions={items} completeMethod={search} className={classNames({ 'p-invalid': fieldState.error })} />
                             {getFormErrorMessage(field.name)}<br></br><br></br>
                         </>
@@ -154,16 +154,15 @@ const [err409,setErr409]=useState(false)
                              inputRef={field.ref} suggestions={items} completeMethod={search} className={classNames({ 'p-invalid': fieldState.error })} />
                             {getFormErrorMessage(field.name)}<br></br><br></br> */}
                             <Accordion activeIndex={0} >
-                                <AccordionTab header="address" style={{ width: 200 }}>
-                                    <InputText placeholder="city" style={{ width: 150 }} onChange={(e)=>setCity(e.target.value)} />
-                                    <InputText placeholder="street" style={{ width: 150 }} onChange={(e)=>setStreet(e.target.value)} />
-                                    <InputText placeholder="building number" style={{ width: 150 }} onChange={(e)=>setBuildingNumber(e.target.value)} />
+                                <AccordionTab header="כתובת" style={{ width: 200 }}>
+                                    <InputText placeholder="עיר" style={{ width: 150 }} onChange={(e)=>setCity(e.target.value)} />
+                                    <InputText placeholder="רחוב" style={{ width: 150 }} onChange={(e)=>setStreet(e.target.value)} />
+                                    <InputText placeholder="מספר בנין" style={{ width: 150 }} onChange={(e)=>setBuildingNumber(e.target.value)} />
                                 </AccordionTab>
                             </Accordion>
                         </>
                     )}
                 />
-                {console.log("before button")}
                 <br />
                 <br />
                 <Button label="הרשמה" type="submit" icon="pi pi-check" style={{ backgroundColor: 'black', color: 'white', borderColor: 'white' }} />
