@@ -8,7 +8,8 @@ import useAuth from '../hooks/useAuth';
 import { useGetAllCategoriesQuery } from '../features/manager/ManagerCategoryApiSlice';
 
 export default function Navbar(props) {
-    const { isAdmin, name } = useAuth();
+    const { isAdmin, name ,isUser} = useAuth();    
+    // const { isTokenCheck } = useTokenCheck();
     const { data: categories, isLoading, isError, error, isSuccess, refetch } = useGetAllCategoriesQuery();
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -70,9 +71,35 @@ export default function Navbar(props) {
         },
         { icon: 'pi pi-cart-plus', url: '/BasketDesign' }
     ];
-
-    const items = isAdmin ? AdminItems : UserItems;
-
+    const UnregistereduserItems = [
+        { label: 'דף הבית', url: '/' },
+        {
+            label: 'חנות',
+            items: isSuccess ? categories.map(category => ({
+                label: category.name,
+                url: `/Chanut/${(category.name)}`//encodeURIComponent - make the path valid
+            })) : []
+        },
+        {
+            label: 'לאיזור האישי',
+            items: [
+                { label: 'התחברות', url: '/Login' },
+                { label: 'הרשמה', url: '/Register' },
+                { separator: true },
+                {
+                    label: 'התנתקות',
+                    command: () => {
+                        dispatch(removeToken());
+                        navigate("/");
+                    },
+                }
+            ]
+        },
+        { icon: 'pi pi-cart-plus', url: '/BasketDesign' }
+    ];
+    // console.log(isTokenCheck);
+    const items1 = isUser?  UserItems : UnregistereduserItems
+    const items = isAdmin ? AdminItems : items1;
     const start = <img alt="logo" src={`http://localhost:7777/uploads/newlogo.jpg`} height="60" className="mr-2" />;
     const end = (
         <div className="flex align-items-center gap-2">

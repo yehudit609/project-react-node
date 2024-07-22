@@ -32,10 +32,10 @@ import ManagerOrders from './components/ManagerOrders';
 
 function App() {
   
-  
   const {isAdmin,name} = useAuth()
-  console.log(name);
+  console.log("name",name);
   console.log("isAdmin++++",isAdmin);
+  // console.log("11111111111111",isToken);
   return (
 
     <div className="App">  
