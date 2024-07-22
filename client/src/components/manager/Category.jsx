@@ -23,35 +23,25 @@ export default function Category() {
         description: ''
     };
 
-    // const [users, setUsers] = useState(null);
     const [categoryDialog, setCategoryDialog] = useState(false);
     const [deleteCategoryDialog, setDeleteCategoryDialog] = useState(false);
     const [deleteCategorysDialog, setDeleteCategorysDialog] = useState(false);
     const [category, setCategory] = useState(emptyCategory);
-    //user || product
     const [selectedCategorys, setSelectedCategorys] = useState(null);
     const [submitted, setSubmitted] = useState(false);
     const [globalFilter, setGlobalFilter] = useState(null);
     const toast = useRef(null);
     const dt = useRef(null);
-
     const { data:categorys, isLoading, isError, error, isSuccess,refetch } = useGetAllCategoriesQuery()
-    console.log(categorys)
-    // const { data:user, isLoading1, isError1, error1, isSuccess1 } = useGetUserByIdQuery()
-    // const { data:allCategories=[], isLoading:isLoading2, isError:isError2, error:error2, isSuccess:isSuccess2,refetch:refetchCategories } = useGetAllCategoriesQuery()
-
     const [ createCategory, {isError: isError5, error:error5, isSuccess:isSuccess5}] = useAddNewCategoryMutation()//creteProd
     const [ deleteCategory, {isError: isError3, error:error3, isSuccess:isSuccess3}] = useDeleteCategoryMutation()//deleteProd
-    const [ updateCategory, {isError: isError4,error: error4, isSuccess:isSuccess4 }] = useUpdateCategoryMutation()//updateProd
-    // const [ updateCategoryActive, {isError: isError2,error: error2, isSuccess:isSuccess2 }] = useUpdateUserMutation()
-    
+    const [ updateCategory, {isError: isError4,error: error4, isSuccess:isSuccess4 }] = useUpdateCategoryMutation()//updateProd    
 
     useEffect(() => {
         if(isSuccess){
             console.log("asdfffffffff",categorys);
         }
     }, [isSuccess]);
-    // console.log(users)
 
     const formatCurrency = (value) => {
         return value.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
@@ -90,12 +80,9 @@ export default function Category() {
                 toast.current.show({ severity: 'success', summary: 'Successful', detail: 'category Updated', life: 3000 ,ZIndexUtils:100000});
             } 
             else {
-                //_user._id = createId();
-                // _user.image = 'user-placeholder.svg';
                 createCategory(_category)
                 refetch()
-                console.log("after creating prod!");
-                
+                console.log("after creating prod!");                
                 _categorys.push(_category);
                 toast.current.show({ severity: 'success', summary: 'Successful', detail: 'category Created', life: 3000 });
             }
@@ -105,29 +92,25 @@ export default function Category() {
         }
         window.location.reload(true)
     };
-//editttttttttttttttttt
+//edit
     const editCategory = (category) => {
         setCategory({ ...category });
         setCategoryDialog(true);
     };
 
-//deleteeeeeeeeeeeeee
+//delete
     const confirmDeleteCategory = (category) => {
-        // console.log("confirmDeleteProduct: ",product._id);
         setCategory(category);
         setDeleteCategoryDialog(true);
         refetch()
     };
 
     const deleteCategory1 = () => {
-        deleteCategory(category._id)
-        
+        deleteCategory(category._id)        
         refetch()
         setDeleteCategoryDialog(false);
         setCategory(emptyCategory);
-        //אני רוצה לשים פה סוויט אלרט
-
-        toast.current.show({ severity: 'success', summary: 'Successful', detail: 'Category Deleted', life: 3000 });
+        toast.current.show({ severity: 'success', summary: 'Successful', detail: 'Category Deleted', life: 3000,ZIndexUtils:100000 });
     };
 
     const findIndexById = (id) => {
@@ -139,54 +122,24 @@ export default function Category() {
                 break;
             }
         }
-
         return index;
     };
-
-    // const createId = () => {
-    //     let id = '';
-    //     let chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-
-    //     for (let i = 0; i < 5; i++) {
-    //         id += chars.charAt(Math.floor(Math.random() * chars.length));
-    //     }
-
-    //     return id;
-    // };
 
     const exportCSV = () => {
         dt.current.exportCSV();
     };
 
-    // const confirmDeleteSelected = () => {
-    //     setDeleteUsersDialog(true);
-    // };
-
     const deleteSelectedCategorys = () => {
         let _categorys = categorys.filter((val) => !selectedCategorys.includes(val));
-
-        // setProducts(_products);
         setDeleteCategorysDialog(false);
         setSelectedCategorys(null);
         toast.current.show({ severity: 'success', summary: 'Successful', detail: 'Categorys Deleted', life: 3000 });
     };
 
-    // const onCategoryChange = (e) => {
-    //     // console.log("onCategoryChange: ",e.target.name._id);
-    //     let _user = { ...user };
-
-    //     _user['category'] = e.target.name._id;
-    //     setUser(_user);
-    // };
-
     const onInputChange = (e, name) => {
-        
-        // console.log("onInputChange",e,name);
         const val = (e.target && e.target.value) || '';
         let _category = { ...category };
-
         _category[`${name}`] = val;
-
         setCategory(_category);
     };
 
@@ -206,7 +159,6 @@ export default function Category() {
         return formatCurrency(rowData.price);
     };
     
-    //aaaaaaaaaaaaaaa
     const actionBodyTemplate = (rowData) => {
         return (
             <React.Fragment>
@@ -215,7 +167,6 @@ export default function Category() {
             </React.Fragment>
         );
     };
-    //aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 
     const header = (
         <div className="flex flex-wrap gap-2 align-items-center justify-content-between">
@@ -244,14 +195,7 @@ export default function Category() {
             <Button label="כן" icon="pi pi-check" severity="danger" onClick={deleteSelectedCategorys} />
         </React.Fragment>
     );
-    const onRoleChange = (e) => {
-        // console.log("onCategoryChange: ",e.target.name._id);
-        let _category = { ...categorys };
-
-        _category['roles'] = e.target.name._id;
-        setCategory(_category);
-    };
-
+    
     return (
         <div>
             {categorys?

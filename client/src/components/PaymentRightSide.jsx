@@ -2,7 +2,6 @@
 
 import { useAddNewOrderMutation } from '../features/manager/ManagerOrderApiSlice'
 import { useDeleteAllBasketMutation, useGetAllCartQuery } from '../features/basket/basketApiSlice';
-
 import React, { useState, useEffect } from "react";
 import { Button } from 'primereact/button';
 import { InputText } from 'primereact/inputtext';
@@ -11,21 +10,16 @@ import { Accordion, AccordionTab } from 'primereact/accordion';
 import { useNavigate } from 'react-router-dom';
 import useAuth from '../hooks/useAuth';
 
-
-
 const PaymentRightSide = () => {
     const [createOrd] = useAddNewOrderMutation();
     const [deleteAllBasket] = useDeleteAllBasketMutation();
     const { data: allCart } = useGetAllCartQuery();
-        //prodId:mongoose.Schema.Types.ObjectId, name:String,quantity:Number, price:Number,image:String
-
     const { _id } = useAuth();
     const [totalPrice, setTotalPrice] = useState(0);
     const navigate = useNavigate();
 
     let city, street, buildingNumber;
     const {userName, name, email, phone, isAdmin, isUser,address } = useAuth()
-    console.log("phoneeee: "+phone);
     city = address?.split(' ')[0]
     street = address?.split(' ')[1]
     buildingNumber = address?.split(' ')[2]

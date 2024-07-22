@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { Button } from 'primereact/button';
 import { classNames } from 'primereact/utils';
-import { AutoComplete } from "primereact/autocomplete";
 import { Toast } from "primereact/toast";
 import "primereact/resources/themes/lara-light-cyan/theme.css";
 import { InputText } from 'primereact/inputtext';
@@ -17,25 +16,16 @@ import useAuth from '../hooks/useAuth';
 const Login = () => {
 
     const dispatch = useDispatch()
-    const {isAdmin, name} = useAuth()
-    const [loginFunc, { isError, error, isSuccess, data }] = useLoginMutation()
-
-    const [addProdToBasket, { isError2, error2, isSuccess2, data2 }] = useAddNewProdToBasketMutation()
-
+    const {isAdmin} = useAuth()
+    const [loginFunc, { isError, isSuccess, data }] = useLoginMutation()
+    const [addProdToBasket] = useAddNewProdToBasketMutation()
     const cart = JSON.parse(localStorage.getItem('cart')) || []
-
     const toast = useRef(null);
     const [items, setItems] = useState([]);
     const defaultValues = { userName: '', password: '' };
-
     const form = useForm({ defaultValues });
     const errors = form.formState.errors;
-
     const navigate = useNavigate()
-    // const show = () => {
-    //     toast.current.show({ severity: 'success', summary: 'Form Submitted', detail: form.getValues('value') });
-    // };
-
     const search = (event) => {
         setItems([...Array(10).keys()].map((item) => event.query + '-' + item));
     };
@@ -83,9 +73,7 @@ const Login = () => {
                     else{
                         navigate("/")
                     }
-
-                  });
-                
+                  });                
             }
             else
                 navigate("/")

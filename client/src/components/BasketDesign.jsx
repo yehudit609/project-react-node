@@ -11,10 +11,10 @@ export default function BasketDesign() {
     const [products, setProducts] = useState([]);
     const [ableCloseOrder, setAbleCloseOrder] = useState(false);
     const navigate = useNavigate();
-    const { data: allCart, isLoading, isError, error, isSuccess, refetch } = useGetAllCartQuery();
+    const { data: allCart,isSuccess, refetch } = useGetAllCartQuery();
     const [changeQuantity, { isSuccess: isChangeQtySuccess }] = useChangeQuantityOfProdMutation();
     const [deleteProd, { isSuccess: isDeleteProdSuccess }] = useDeleteProdMutation();
-    const { data: availibleProducts, isLoading: isLoading2, isError: isError2, error: error2, isSuccess: isSuccess2 } = useGetAllProductQuery();
+    const { data: availibleProducts, isSuccess: isSuccess2 } = useGetAllProductQuery();
 
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
     
@@ -34,7 +34,6 @@ export default function BasketDesign() {
                 setProducts(filteredCart);
                 setAbleCloseOrder(filteredCart.length === 0);
             }
-
             if (isChangeQtySuccess || isDeleteProdSuccess) {
                 refetch();
             }
@@ -86,7 +85,6 @@ export default function BasketDesign() {
                     <div className="flex flex-column sm:flex-row justify-content-between align-items-center xl:align-items-start flex-1 gap-4">
                         <div className="flex flex-column align-items-center sm:align-items-start gap-3">
                             <div className="text-2xl font-bold text-900">{product.name}</div>
-                            {/* product.prodId ? product.prodId.name :  */}
                             <div className="flex-auto">
                                 <label htmlFor="change quantity" className="font-bold block mb-2">change quantity</label>
                                 <InputNumber inputId="change quantity" value={localStorage.getItem('token') ? product.quantity : functionThatReturnFromStorageTheQtyOfThisProd(product)} onValueChange={(e) => handleChangeQty(e, product)} mode="decimal" showButtons min={1} max={100} />
@@ -100,8 +98,7 @@ export default function BasketDesign() {
                 </div>
             </div>
             </>
-        );
-        
+        );        
     };
 
     const listTemplate = (items) => {

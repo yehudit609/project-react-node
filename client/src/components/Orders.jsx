@@ -3,17 +3,14 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { Tag } from 'primereact/tag';
 import { Steps } from 'primereact/steps';
-import { CustomerService } from './CustomerService';
-//import { useAddNewProdToBasketMutation, useChangeQuantityOfProdMutation, useDeleteProdMutation, useGetAllCartQuery } from "../features/basket/basketApiSlice"
 import { useGetOrdersByIdQuery } from '../features/order/orderApiSlice'
 import useAuth from '../hooks/useAuth';
 
 export default function Orders() {
     const [orders, setOrders] = useState([]);
     const [expandedRows, setExpandedRows] = useState([]);
-    const { _id, userName, name, email, phone, isAdmin, isUser, address } = useAuth();
-   
-    const { data: clientOrders, isLoading, isError, error, isSuccess, refetch } = useGetOrdersByIdQuery(_id);
+    const { _id} = useAuth();   
+    const { data: clientOrders, isSuccess, refetch } = useGetOrdersByIdQuery(_id);
 
     useEffect(() => {
         if (isSuccess) {

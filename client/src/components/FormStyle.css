@@ -8,9 +8,6 @@
   width: 300px;
   border-radius: 8px;
 }
-.p-toast {
-  z-index: 100000;  /* Set a high z-index value to ensure the toast appears in front */
-}
 
 .contact-form input, .contact-form button {
   padding: 8px;

@@ -9,18 +9,9 @@ import { useGetAllCategoriesQuery } from '../features/manager/ManagerCategoryApi
 
 export default function Navbar(props) {
     const { isAdmin, name ,isUser} = useAuth();    
-    // const { isTokenCheck } = useTokenCheck();
-    const { data: categories, isLoading, isError, error, isSuccess, refetch } = useGetAllCategoriesQuery();
+    const { data: categories, isSuccess } = useGetAllCategoriesQuery();
     const dispatch = useDispatch();
     const navigate = useNavigate();
-
-    const itemRenderer = (item) => (
-        <a className="flex align-items-center p-menuitem-link">
-            <span className="mx-2">{item.label}</span>
-            {item.badge && <Badge className="ml-auto" value={item.badge} />}
-            {item.shortcut && <span className="ml-auto border-1 surface-border border-round surface-100 text-xs p-1">{item.shortcut}</span>}
-        </a>
-    );
 
     const AdminItems = [
         { label: 'דף הבית', url: '/' },
@@ -97,13 +88,11 @@ export default function Navbar(props) {
         },
         { icon: 'pi pi-cart-plus', url: '/BasketDesign' }
     ];
-    // console.log(isTokenCheck);
     const items1 = isUser?  UserItems : UnregistereduserItems
     const items = isAdmin ? AdminItems : items1;
     const start = <img alt="logo" src={`http://localhost:7777/uploads/newlogo.jpg`} height="60" className="mr-2" />;
     const end = (
         <div className="flex align-items-center gap-2">
-            {/* Optional additional items */}
         </div>
     );
 

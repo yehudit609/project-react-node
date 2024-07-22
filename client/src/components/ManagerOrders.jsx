@@ -9,7 +9,7 @@ export default function ManagerOrders() {
     const [orders, setOrders] = useState([]);
     const [expandedRows, setExpandedRows] = useState([]);
     const [currentStatus, setCurrentStatus] = useState('');
-    const { data: ordersData, isLoading, isError, error, isSuccess } = useGetAllOrderQuery();
+    const { data: ordersData, isSuccess } = useGetAllOrderQuery();
     const [updateOrderStatus] = useUpdateOrderMutation();
 
 

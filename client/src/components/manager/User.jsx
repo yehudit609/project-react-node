@@ -1,21 +1,13 @@
-
-
 import React, { useState, useEffect, useRef } from 'react';
 import { classNames } from 'primereact/utils';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { Toast } from 'primereact/toast';
 import { Button } from 'primereact/button';
-import { FileUpload } from 'primereact/fileupload';
-import { Toolbar } from 'primereact/toolbar';
-import { InputTextarea } from 'primereact/inputtextarea';
-import { RadioButton } from 'primereact/radiobutton';
-import { InputNumber } from 'primereact/inputnumber';
 import { Dialog } from 'primereact/dialog';
 import { InputText } from 'primereact/inputtext';
-import { Tag } from 'primereact/tag';
 import { useAddNewUserMutation,useDeleteUserMutation,useGetAllUsersQuery,useUpdateUserMutation } from '../../features/manager/ManagerUserApiSlice';
-import { Dropdown } from 'primereact/dropdown';
+import { Toolbar } from 'primereact/toolbar';
 
 export default function User() {
     let emptyUser = {
@@ -27,39 +19,25 @@ export default function User() {
         address:''
     };
 
-    // const [users, setUsers] = useState(null);
     const [userDialog, setUserDialog] = useState(false);
     const [deleteUserDialog, setDeleteUserDialog] = useState(false);
     const [deleteUsersDialog, setDeleteUsersDialog] = useState(false);
     const [user, setUser] = useState(emptyUser);
-    //user || product
     const [selectedUsers, setSelectedUsers] = useState(null);
     const [submitted, setSubmitted] = useState(false);
     const [globalFilter, setGlobalFilter] = useState(null);
     const toast = useRef(null);
     const dt = useRef(null);
-
     const { data:users, isLoading, isError, error, isSuccess,refetch } = useGetAllUsersQuery()
-    console.log(users)
-    // const { data:user, isLoading1, isError1, error1, isSuccess1 } = useGetUserByIdQuery()
-    // const { data:allCategories=[], isLoading:isLoading2, isError:isError2, error:error2, isSuccess:isSuccess2,refetch:refetchCategories } = useGetAllCategoriesQuery()
-
-    const [ createUser, {isError: isError5, error:error5, isSuccess:isSuccess5}] = useAddNewUserMutation()//creteProd
-    const [ deleteUser, {isError: isError3, error:error3, isSuccess:isSuccess3}] = useDeleteUserMutation()//deleteProd
-    const [ updateUser, {isError: isError4,error: error4, isSuccess:isSuccess4 }] = useUpdateUserMutation()//updateProd
-    const [ updateUserActive, {isError: isError2,error: error2, isSuccess:isSuccess2 }] = useUpdateUserMutation()
-    
+    const [ createUser] = useAddNewUserMutation()//creteProd
+    const [ deleteUser] = useDeleteUserMutation()//deleteProd
+    const [ updateUser] = useUpdateUserMutation()//updateProd    
 
     useEffect(() => {
         if(isSuccess){
             console.log("asdfffffffff",users);
         }
     }, [isSuccess]);
-    // console.log(users)
-
-    const formatCurrency = (value) => {
-        return value.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
-    };
 
     const openNew = () => {
         setUser(emptyUser);
@@ -82,9 +60,6 @@ export default function User() {
 
     const saveUser = async () => {
         setSubmitted(true);
-
-        {console.log("saveUser",user) } 
-        console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",user);
         if (user.name.trim()) {
             console.log("user.name.trim()");
             let _users = [...users];
@@ -111,17 +86,16 @@ export default function User() {
             refetch()
         }
     };
-//editttttttttttttttttt
+//edit
     const editUser = (user) => {
         console.log("edit");
         console.log(user);
         setUser({ ...user });
         setUserDialog(true);
-        refetch()
-        
+        refetch()        
     };
 
-//deleteeeeeeeeeeeeee
+//delete
     const confirmDeleteUser = (user) => {
         setUser(user);
         setDeleteUserDialog(true);
@@ -133,8 +107,6 @@ export default function User() {
         refetch()
         setDeleteUserDialog(false);
         setUser(emptyUser);
-        // swal('new user added!',`user: ${user.name}`,'success')
-        //אני רוצה לשים פה סוויט אלרט
         toast.current.show({ severity: 'success', summary: 'Successful', detail: 'User Deleted', life: 3000 });
     };
 
@@ -147,7 +119,6 @@ export default function User() {
                 break;
             }
         }
-
         return index;
     };
 
@@ -166,9 +137,7 @@ export default function User() {
     const onInputChange = (e, name) => {
         const val = (e.target && e.target.value) || '';
         let _user = { ...user };
-
         _user[`${name}`] = val;
-
         setUser(_user);
     };
 
@@ -201,16 +170,6 @@ export default function User() {
         }
     };
 
-    const actionBodyTemplate12 = (rowData) => {
-        
-        return (
-            <React.Fragment>
-                {/* <Button icon="pi pi-pencil" rounded outlined className="mr-2" onClick={() => editUser(rowData)} /> */}
-                <Button icon="pi pi-trash" rounded outlined severity="danger" onClick={() => confirmDeleteUser(rowData)} />
-            </React.Fragment>
-        );
-    };
-
     const header = (
         <div className="flex flex-wrap gap-2 align-items-center justify-content-between">
             <h4 className="m-0">נהל משתמשים</h4>
@@ -232,19 +191,6 @@ export default function User() {
             <Button label="כן" icon="pi pi-check" severity="danger" onClick={deleteUser1} />
         </React.Fragment>
     );
-    const deleteUsersDialogFooter = (
-        <React.Fragment>
-            <Button label="לא" icon="pi pi-times" outlined onClick={hideDeleteUsersDialog} />
-            <Button label="כן" icon="pi pi-check" severity="danger" onClick={deleteSelectedUsers} />
-        </React.Fragment>
-    );
-    const onRoleChange = (e) => {
-        // console.log("onCategoryChange: ",e.target.name._id);
-        let _user = { ...users };
-
-        _user['roles'] = e.target.name._id;
-        setUser(_user);
-    };
 
     return (
         <div>
@@ -265,9 +211,7 @@ export default function User() {
                  
                     {console.log("user: ",user," toast ",toast)}
                     {console.log("users: ",users)}
-                    {/* <Column body={users.roles=="Admin"?actionBodyTemplate:actionBodyTemplate12} exportable={false} style={{ minWidth: '12rem' }}></Column> */}
                     <Column body={actionBodyTemplate} exportable={false} style={{ minWidth: '12rem' }}></Column>
-                   {/* </> <Column body={actionBodyTemplate12} exportable={false} style={{ minWidth: '12rem' }}></Column></>} */}
                 </DataTable>
             </div>
 

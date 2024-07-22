@@ -3,7 +3,7 @@ import { jwtDecode } from "jwt-decode"
 
 const useAuth = ()=>{
     
-    const token = localStorage.getItem("token")//useSelector(selectToken)
+    const token = localStorage.getItem("token")
     let isAdmin = false
     let isUser = false
     if(token){

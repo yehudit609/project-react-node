@@ -8,6 +8,17 @@ const HomePage = () => {
     "http://localhost:7777/uploads/a.jpg",
     "http://localhost:7777/uploads/c.jpg",
     "http://localhost:7777/uploads/b.jpg",
+    "http://localhost:7777/uploads/d.jpg",
+    "http://localhost:7777/uploads/e.jpg",
+    "http://localhost:7777/uploads/f.jpg",
+    "http://localhost:7777/uploads/g.jpg",
+    "http://localhost:7777/uploads/h.jpg",
+    "http://localhost:7777/uploads/i.jpg",
+    "http://localhost:7777/uploads/j.jpg",
+    "http://localhost:7777/uploads/k.jpg",
+    "http://localhost:7777/uploads/l.jpg",
+    "http://localhost:7777/uploads/m.jpg",
+    "http://localhost:7777/uploads/n.jpg",
   ];
 
   useEffect(() => {
